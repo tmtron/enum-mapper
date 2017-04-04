@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/annotation/annotation.iml" filepath="$PROJECT_DIR$/.idea/modules/annotation/annotation.iml" group="annotation" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/annotation/annotation_main.iml" filepath="$PROJECT_DIR$/.idea/modules/annotation/annotation_main.iml" group="annotation" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/annotation/annotation_test.iml" filepath="$PROJECT_DIR$/.idea/modules/annotation/annotation_test.iml" group="annotation" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/enums.iml" filepath="$PROJECT_DIR$/.idea/modules/enums.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/enums_main.iml" filepath="$PROJECT_DIR$/.idea/modules/enums_main.iml" group="enums" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/enums_test.iml" filepath="$PROJECT_DIR$/.idea/modules/enums_test.iml" group="enums" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/processor/processor.iml" filepath="$PROJECT_DIR$/.idea/modules/processor/processor.iml" group="processor" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/processor/processor_main.iml" filepath="$PROJECT_DIR$/.idea/modules/processor/processor_main.iml" group="processor" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/processor/processor_test.iml" filepath="$PROJECT_DIR$/.idea/modules/processor/processor_test.iml" group="processor" />
+    </modules>
+  </component>
+</project>

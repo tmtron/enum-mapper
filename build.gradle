@@ -1,0 +1,32 @@
+plugins {
+    /* this plugin can check for newer versions of the used dependencies.
+     * run it from the command line like this:
+     * ./gradlew dependencyUpdates
+     * see also: https://github.com/ben-manes/gradle-versions-plugin
+     *
+     * in Android Studio open the gradle projects view and start
+     * Tasks - help - dependencyUpdates
+     *
+     * alternative:
+     * IntelliJ: Analyze - Inspect code
+     *   the results in the Inspection view will contain dependencies that can be updated
+     *   Android>Lint>Correctness>Obsolete Gradle Dependency
+     */
+    id 'com.github.ben-manes.versions' version '0.14.0'
+}
+
+group 'com.tmtron.enums'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
