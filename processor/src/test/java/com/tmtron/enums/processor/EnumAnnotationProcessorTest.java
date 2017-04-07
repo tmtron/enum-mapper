@@ -14,7 +14,7 @@ public class EnumAnnotationProcessorTest {
         JavaFileObject source = JavaFileObjects.forSourceString(
                 "test.Dummy"
                 , "// comment"
-                        + "\npackage test;"
+                        + "\npackage com.test;"
                         + "\nimport com.tmtron.enums.annotation.MapAllEnums;"
                         + "\n@MapAllEnums(enums = {Dummy.ColorEnum.class, Dummy.BoolEnum.class})"
                         + "\npublic class Dummy {"
