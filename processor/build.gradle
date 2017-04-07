@@ -18,4 +18,8 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
     testCompile 'com.google.testing.compile:compile-testing:0.10'
     testCompile 'com.google.truth:truth:0.32'
+    /* we need the JVM tools, otherwise the tests may fail with:
+     *   java.lang.NoClassDefFoundError: com/sun/source/util/TreeScanner
+     */
+    testCompile files(org.gradle.internal.jvm.Jvm.current().getToolsJar())
 }

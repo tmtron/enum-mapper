@@ -7,11 +7,8 @@ import java.util.List;
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.lang.model.element.AnnotationMirror;
 import javax.lang.model.element.AnnotationValue;
-import javax.lang.model.element.Element;
-import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.type.TypeMirror;
-import javax.tools.Diagnostic;
 
 /**
  * Will handle a single {@link com.tmtron.enums.annotation.MapAllEnums} annotation.
@@ -44,23 +41,7 @@ public class MapAllEnumsHandler {
             TypeMirror enumsClassTypeMirror = (TypeMirror) enumsClassAnnotationValue.getValue();
             TypeElement enumsClassTypeElement = MoreTypes.asTypeElement(enumsClassTypeMirror);
             // e.g. enumsClassTypeElement.getQualifiedName() "com.test.Dummy.BoolEnum.class"
-            createEnumMapper(enumsClassTypeElement);
-        }
-    }
-
-    // e.g. enumsClassTypeElement.getQualifiedName() "com.test.Dummy.BoolEnum.class"
-    private void createEnumMapper(TypeElement enumsClassTypeElement) {
-        String msg = "creating enum mapper for: " + enumsClassTypeElement.getQualifiedName();
-        processingEnvironment.getMessager().printMessage(Diagnostic.Kind.NOTE, msg);
-        if (!ElementKind.ENUM.equals(enumsClassTypeElement.getKind())) {
-            throw new RuntimeException(enumsClassTypeElement.toString() + " is not an ENUM kind");
-        }
-
-        for (Element element : enumsClassTypeElement.getEnclosedElements()) {
-            if (ElementKind.ENUM_CONSTANT.equals(element.getKind())) {
-                msg = element.getSimpleName().toString();
-                processingEnvironment.getMessager().printMessage(Diagnostic.Kind.NOTE, msg);
-            }
+            new MapEnumElement(processingEnvironment, enumsClassTypeElement).work();
         }
     }
 
