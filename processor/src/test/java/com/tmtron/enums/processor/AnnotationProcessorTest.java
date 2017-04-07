@@ -8,6 +8,11 @@ import javax.tools.JavaFileObject;
 
 public class AnnotationProcessorTest {
 
+    /**
+     * Will add "-Xlint:-processing" to the compile options, so that we don't get the warning:
+     * "No processor claimed any of these annotations..."
+     * see {@link EnumAnnotationProcessorTest#testWarningMessage()}
+     */
     CompileTester assertAboutEnumsProcessing(JavaFileObject source) {
         return Truth.assertAbout(JavaSourceSubjectFactory.javaSource())
                 .that(source)
