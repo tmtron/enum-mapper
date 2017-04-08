@@ -1,17 +1,14 @@
 package com.tmtron.enums.processor;
 
 import com.google.auto.common.BasicAnnotationProcessor;
-import com.google.auto.common.MoreElements;
-import com.google.common.base.Optional;
 import com.google.common.collect.SetMultimap;
-import com.tmtron.enums.annotation.MapAllEnums;
+import com.tmtron.enums.MapAllEnums;
 
 import java.lang.annotation.Annotation;
 import java.util.Collections;
 import java.util.Set;
 
 import javax.annotation.processing.ProcessingEnvironment;
-import javax.lang.model.element.AnnotationMirror;
 import javax.lang.model.element.Element;
 import javax.tools.Diagnostic;
 
@@ -40,7 +37,7 @@ public class MapAllEnumsProcessingStep implements BasicAnnotationProcessor.Proce
             // the annotation may be present on multiple classes
             for (Element element : elementsByAnnotation.get(annotation)) {
                 try {
-                    processElement(element);
+                    new MapAllEnumsHandler(processingEnvironment, element).work();
                 } catch (Exception e) {
                     processingEnvironment.getMessager().printMessage(Diagnostic.Kind.ERROR
                             , "Annotation processing error: " + e.getClass().getSimpleName() + "-" + e.getMessage()
@@ -54,17 +51,5 @@ public class MapAllEnumsProcessingStep implements BasicAnnotationProcessor.Proce
         }
 
         return Collections.emptySet();
-    }
-
-    /**
-     * the element must be annotated with the {@link MapAllEnums} annotation
-     */
-    private void processElement(Element element) {
-        Optional<AnnotationMirror> optMirror = MoreElements.getAnnotationMirror(element, MapAllEnums.class);
-        if (!optMirror.isPresent()) {
-            throw new RuntimeException(MapAllEnums.class.getSimpleName() + " annotation not found!");
-        }
-
-        new MapAllEnumsHandler(processingEnvironment, optMirror.get()).work();
     }
 }

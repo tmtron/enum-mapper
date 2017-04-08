@@ -1,17 +1,21 @@
 package com.tmtron.enums.processor;
 
+import com.google.auto.common.MoreElements;
 import com.google.auto.common.MoreTypes;
+import com.google.common.base.Optional;
+import com.tmtron.enums.MapAllEnums;
 
 import java.util.List;
 
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.lang.model.element.AnnotationMirror;
 import javax.lang.model.element.AnnotationValue;
+import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.type.TypeMirror;
 
 /**
- * Will handle a single {@link com.tmtron.enums.annotation.MapAllEnums} annotation.
+ * Will handle a single {@link com.tmtron.enums.MapAllEnums} annotation.
  * Which may contain multiple Enum classes in the enums class array.
  */
 public class MapAllEnumsHandler {
@@ -20,20 +24,34 @@ public class MapAllEnumsHandler {
     private static final String ENUMS_ID = "enums";
     private final AnnotationMirror annotationMirrorMapAllEnums;
     private final ProcessingEnvironment processingEnvironment;
+    private final Element annotatedElement;
 
-    public MapAllEnumsHandler(ProcessingEnvironment processingEnvironment, AnnotationMirror
-            annotationMirrorMapAllEnums) {
-        this.annotationMirrorMapAllEnums = annotationMirrorMapAllEnums;
+    /**
+     * Will process an element (e.g. a class) which must have the {@link com.tmtron.enums.MapAllEnums} annotation.
+     * Note: the {@link MapAllEnums} annotation may contain multiple Enum classes in the enums class array.
+     *
+     * @param processingEnvironment the processing environment
+     * @param annotatedElement      the element (e.g. class) which has the {@link MapAllEnums} annotation
+     */
+    public MapAllEnumsHandler(ProcessingEnvironment processingEnvironment,
+                              Element annotatedElement) {
         this.processingEnvironment = processingEnvironment;
+        this.annotatedElement = annotatedElement;
+
+        Optional<AnnotationMirror> optMirror = MoreElements.getAnnotationMirror(annotatedElement, MapAllEnums.class);
+        if (!optMirror.isPresent()) {
+            throw new RuntimeException(MapAllEnums.class.getSimpleName() + " annotation not found!");
+        }
+        this.annotationMirrorMapAllEnums = optMirror.get();
     }
 
     public void work() {
-        AnnotationValue annotationValue = AnnoationProcessingUtil.getRequiredAnnotationValue
+        AnnotationValue annotationValue = AnnotationProcessingUtil.getRequiredAnnotationValue
                 (annotationMirrorMapAllEnums, ENUMS_ID);
         // e.g. "enums" -> {com.test.Dummy.ColorEnum.class, com.test.Dummy.BoolEnum.class}
 
         // the "enums" member is an array of classes
-        List<? extends AnnotationValue> enumsList = AnnoationProcessingUtil.asList(annotationValue.getValue(),
+        List<? extends AnnotationValue> enumsList = AnnotationProcessingUtil.asList(annotationValue.getValue(),
                 AnnotationValue.class, ENUMS_ID);
 
         // loop over each class in the "enums" array
@@ -41,7 +59,7 @@ public class MapAllEnumsHandler {
             TypeMirror enumsClassTypeMirror = (TypeMirror) enumsClassAnnotationValue.getValue();
             TypeElement enumsClassTypeElement = MoreTypes.asTypeElement(enumsClassTypeMirror);
             // e.g. enumsClassTypeElement.getQualifiedName() "com.test.Dummy.BoolEnum.class"
-            new MapEnumElement(processingEnvironment, enumsClassTypeElement).work();
+            new MapEnumElement(processingEnvironment, annotatedElement, enumsClassTypeElement).work();
         }
     }
 

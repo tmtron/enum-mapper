@@ -1,13 +1,26 @@
 package com.tmtron.enums.processor;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Supplier;
 
 import javax.lang.model.element.AnnotationMirror;
 import javax.lang.model.element.AnnotationValue;
 import javax.lang.model.element.ExecutableElement;
 
-public class AnnoationProcessingUtil {
+class AnnotationProcessingUtil {
+
+    private static volatile Supplier<ZonedDateTime> zonedDateTimeProvider = ZonedDateTime::now;
+
+    // visible for testing
+    static void setCurrentTimeProvider(Supplier<ZonedDateTime> currentTimeProvider) {
+        AnnotationProcessingUtil.zonedDateTimeProvider = currentTimeProvider;
+    }
+
+    public static ZonedDateTime now() {
+        return zonedDateTimeProvider.get();
+    }
 
     /**
      * Returns the AnnotationValue with the elementNameSimple from the annotationMirror

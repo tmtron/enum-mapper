@@ -1,4 +1,4 @@
-package com.tmtron.enums.annotation;
+package com.tmtron.enums;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
