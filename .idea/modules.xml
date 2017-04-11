@@ -6,8 +6,6 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/annotations/annotations_main.iml" filepath="$PROJECT_DIR$/.idea/modules/annotations/annotations_main.iml" group="annotations" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/annotations/annotations_test.iml" filepath="$PROJECT_DIR$/.idea/modules/annotations/annotations_test.iml" group="annotations" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/enums.iml" filepath="$PROJECT_DIR$/.idea/modules/enums.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/enums_main.iml" filepath="$PROJECT_DIR$/.idea/modules/enums_main.iml" group="enums" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/enums_test.iml" filepath="$PROJECT_DIR$/.idea/modules/enums_test.iml" group="enums" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/annotation/mapper.iml" filepath="$PROJECT_DIR$/.idea/modules/annotation/mapper.iml" group="mapper" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/mapper/mapper_main.iml" filepath="$PROJECT_DIR$/.idea/modules/mapper/mapper_main.iml" group="mapper" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/mapper/mapper_test.iml" filepath="$PROJECT_DIR$/.idea/modules/mapper/mapper_test.iml" group="mapper" />

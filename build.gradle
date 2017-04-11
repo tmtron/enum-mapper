@@ -1,3 +1,9 @@
+buildscript {
+    dependencies {
+        classpath "gradle.plugin.nl.javadude.gradle.plugins:license-gradle-plugin:0.13.1"
+    }
+}
+
 plugins {
     /* this plugin can check for newer versions of the used dependencies.
      * run it from the command line like this:
@@ -18,15 +24,22 @@ plugins {
 group 'com.tmtron.enums'
 version '1.0-SNAPSHOT'
 
-apply plugin: 'java'
+subprojects {
+    apply plugin: 'java'
 
-sourceCompatibility = 1.8
+    sourceCompatibility = 1.8
 
+    apply plugin: "com.github.hierynomus.license"
+    license {
+        header rootProject.file('LICENSE_HEADER')
+        strictCheck true
+        mapping {
+            java = 'SLASHSTAR_STYLE'
+        }
+    }
+}
 
 repositories {
     mavenCentral()
 }
 
-dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
-}
