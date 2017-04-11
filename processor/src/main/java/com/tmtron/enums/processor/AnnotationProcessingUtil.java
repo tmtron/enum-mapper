@@ -33,7 +33,7 @@ class AnnotationProcessingUtil {
         AnnotationProcessingUtil.zonedDateTimeProvider = currentTimeProvider;
     }
 
-    public static ZonedDateTime now() {
+    static ZonedDateTime now() {
         return zonedDateTimeProvider.get();
     }
 

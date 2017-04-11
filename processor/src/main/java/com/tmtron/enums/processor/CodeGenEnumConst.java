@@ -22,27 +22,24 @@ import com.squareup.javapoet.TypeVariableName;
 
 import javax.lang.model.element.Element;
 
-public class CodeGenEnumConst {
+/**
+ * Simple helper class to keep info about an enumeration constant which
+ * is used during code-generation via javapoet
+ */
+class CodeGenEnumConst {
 
-    private final TypeVariableName typeVariableName4Value;
-    private final Element enumConstant;
     // e.g. ONLINE
-    public final String identifier;
+    final String identifier;
     // e.g. "setONLINE
-    public final String setterName;
-    // e.g. "IsetONLINE
-    public final String interfaceName;
-    public final ClassName interfaceClassName;
+    final String setterName;
+    final ClassName interfaceClassName;
     // e.g. "IsetONLINE<V>
-    public final TypeName interfaceTypeName;
+    final TypeName interfaceTypeName;
 
-    public CodeGenEnumConst(TypeVariableName typeVariableName4Value, Element enumConstant) {
-        this.typeVariableName4Value = typeVariableName4Value;
-        this.enumConstant = enumConstant;
-
+    CodeGenEnumConst(TypeVariableName typeVariableName4Value, Element enumConstant) {
         identifier = enumConstant.toString();
         setterName = "set" + identifier;
-        interfaceName = "I" + setterName;
+        String interfaceName = "I" + setterName;
         interfaceClassName = ClassName.get("", interfaceName);
         // StagedBuilder<V>
         interfaceTypeName = ParameterizedTypeName.get(interfaceClassName, typeVariableName4Value);

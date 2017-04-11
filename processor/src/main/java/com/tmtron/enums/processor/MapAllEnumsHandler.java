@@ -33,7 +33,7 @@ import javax.lang.model.type.TypeMirror;
  * Will handle a single {@link com.tmtron.enums.MapAllEnums} annotation.
  * Which may contain multiple Enum classes in the enums class array.
  */
-public class MapAllEnumsHandler {
+class MapAllEnumsHandler {
 
     // the MapAllEnums class must have a member named enums (array of Enum classes)
     private static final String ENUMS_ID = "enums";
@@ -48,8 +48,7 @@ public class MapAllEnumsHandler {
      * @param processingEnvironment the processing environment
      * @param annotatedElement      the element (e.g. class) which has the {@link MapAllEnums} annotation
      */
-    public MapAllEnumsHandler(ProcessingEnvironment processingEnvironment,
-                              Element annotatedElement) {
+    MapAllEnumsHandler(ProcessingEnvironment processingEnvironment, Element annotatedElement) {
         this.processingEnvironment = processingEnvironment;
         this.annotatedElement = annotatedElement;
 
@@ -60,19 +59,23 @@ public class MapAllEnumsHandler {
         this.annotationMirrorMapAllEnums = optMirror.get();
     }
 
-    public void work() {
+    void work() {
+        // get the "enums" annotationValue (which is of type: array of classes)
         AnnotationValue annotationValue = AnnotationProcessingUtil.getRequiredAnnotationValue
                 (annotationMirrorMapAllEnums, ENUMS_ID);
-        // e.g. "enums" -> {com.test.Dummy.ColorEnum.class, com.test.Dummy.BoolEnum.class}
 
-        // the "enums" member is an array of classes
+        // the annotationValue is an array of classes
+        // we convert it to a list where each item is the class
+        // e.g. "enums" -> {com.test.Dummy.ColorEnum.class, com.test.Dummy.BoolEnum.class}
+        //      --> the enumsList will contain 2 items (ColorEnum and BoolEnum)
         List<? extends AnnotationValue> enumsList = AnnotationProcessingUtil.asList(annotationValue.getValue(),
                 AnnotationValue.class, ENUMS_ID);
 
-        // loop over each class in the "enums" array
+        // loop over each (Enum-)class in the "enums" array
         for (AnnotationValue enumsClassAnnotationValue : enumsList) {
             TypeMirror enumsClassTypeMirror = (TypeMirror) enumsClassAnnotationValue.getValue();
             TypeElement enumsClassTypeElement = MoreTypes.asTypeElement(enumsClassTypeMirror);
+            // now process each (Enum-)class
             // e.g. enumsClassTypeElement.getQualifiedName() "com.test.Dummy.BoolEnum.class"
             new MapEnumElement(processingEnvironment, annotatedElement, enumsClassTypeElement).work();
         }

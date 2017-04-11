@@ -23,6 +23,9 @@ import java.util.Collections;
 import javax.annotation.processing.Processor;
 import javax.lang.model.SourceVersion;
 
+/**
+ * This class will register the annotation processor/s.
+ */
 @AutoService(Processor.class)
 public class EnumsAnnotationProcessor extends BasicAnnotationProcessor {
 

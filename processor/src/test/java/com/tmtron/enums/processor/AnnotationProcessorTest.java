@@ -26,14 +26,23 @@ import java.time.ZonedDateTime;
 
 import javax.tools.JavaFileObject;
 
-public class AnnotationProcessorTest {
+/**
+ * Base class for annotation processor tests.
+ * <p>
+ * The base class will setup the date-time handling for the tests and it
+ * provides some useful helper methods.
+ * </p>
+ */
+class AnnotationProcessorTest {
 
+    /* we use a fixed date/time which is the same as in the resource test files
+     */
     private static final ZonedDateTime dateTimeForTesting =
             ZonedDateTime.of(1976, 12, 14
                     , 15, 16, 17, 234000000
                     , ZoneId.ofOffset("UTC", ZoneOffset.ofHours(2)));
 
-    public AnnotationProcessorTest() {
+    AnnotationProcessorTest() {
         AnnotationProcessingUtil.setCurrentTimeProvider(
                 () -> dateTimeForTesting
         );

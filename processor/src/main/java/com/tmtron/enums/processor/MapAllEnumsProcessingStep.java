@@ -27,11 +27,14 @@ import javax.annotation.processing.ProcessingEnvironment;
 import javax.lang.model.element.Element;
 import javax.tools.Diagnostic;
 
+/**
+ * Processing step for the {@link MapAllEnums} annotation
+ */
 public class MapAllEnumsProcessingStep implements BasicAnnotationProcessor.ProcessingStep {
 
     private final ProcessingEnvironment processingEnvironment;
 
-    public MapAllEnumsProcessingStep(ProcessingEnvironment processingEnvironment) {
+    MapAllEnumsProcessingStep(ProcessingEnvironment processingEnvironment) {
         this.processingEnvironment = processingEnvironment;
     }
 
@@ -43,13 +46,15 @@ public class MapAllEnumsProcessingStep implements BasicAnnotationProcessor.Proce
     @Override
     public Set<Element> process(SetMultimap<Class<? extends Annotation>, Element> elementsByAnnotation) {
         try {
+            // the annotations method tells the framework to only accept the MapAllEnums annotation
             if (elementsByAnnotation.keys().size() != 1) throw new RuntimeException("Exactly one annotation expected");
             Class<? extends Annotation> annotation = elementsByAnnotation.keys().iterator().next();
             if (!annotation.getName().equals(MapAllEnums.class.getCanonicalName())) {
                 throw new RuntimeException("Unexpected class found: '" + annotation.getName() + "'"
                         + " Expected class: " + MapAllEnums.class.getCanonicalName());
             }
-            // the annotation may be present on multiple classes
+
+            // the MapAllEnums annotation may be present on multiple classes
             for (Element element : elementsByAnnotation.get(annotation)) {
                 try {
                     new MapAllEnumsHandler(processingEnvironment, element).work();

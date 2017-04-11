@@ -41,9 +41,9 @@ import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
 import javax.tools.Diagnostic;
 
-public class MapEnumElement {
+class MapEnumElement {
 
-    public static final String STATEMENT_PUT_CONSTANT_TO_ENUM_MAPPER = "enumMapperBuilder.put($T.$L, value)";
+    private static final String STATEMENT_PUT_CONSTANT_TO_ENUM_MAPPER = "enumMapperBuilder.put($T.$L, value)";
     private final ProcessingEnvironment processingEnvironment;
     private final Element annotatedElement;
     private final TypeElement enumsClassTypeElement;
@@ -57,8 +57,8 @@ public class MapEnumElement {
      * @param annotatedElement      the element (e.g. class) which has the {@link MapAllEnums} annotation
      * @param enumsClassTypeElement a single Enum class from the "values" array of the {@link MapAllEnums} annotation
      */
-    public MapEnumElement(ProcessingEnvironment processingEnvironment, Element annotatedElement,
-                          TypeElement enumsClassTypeElement) {
+    MapEnumElement(ProcessingEnvironment processingEnvironment, Element annotatedElement,
+                   TypeElement enumsClassTypeElement) {
         this.processingEnvironment = processingEnvironment;
         this.annotatedElement = annotatedElement;
         this.enumsClassTypeElement = enumsClassTypeElement;
@@ -66,7 +66,7 @@ public class MapEnumElement {
     }
 
     // e.g. enumsClassTypeElement.getQualifiedName() "com.test.Dummy.BoolEnum.class"
-    public void work() {
+    void work() {
         String msg = "creating MapEnumElement mapper for: " + enumsClassTypeElement.getQualifiedName();
         processingEnvironment.getMessager().printMessage(Diagnostic.Kind.NOTE, msg);
         if (!ElementKind.ENUM.equals(enumsClassTypeElement.getKind())) {
@@ -192,7 +192,6 @@ public class MapEnumElement {
         try {
             JavaFile.builder(getPackageName(), mapperFullTypeBuilder.build())
                     .skipJavaLangImports(true)
-                    .addFileComment("GENERATED") // TODO: use javax Generated annotation!
                     .build()
                     .writeTo(processingEnvironment.getFiler());
         } catch (
