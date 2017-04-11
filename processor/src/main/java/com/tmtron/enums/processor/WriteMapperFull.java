@@ -18,7 +18,6 @@ package com.tmtron.enums.processor;
 import com.google.auto.common.MoreElements;
 import com.squareup.javapoet.AnnotationSpec;
 import com.squareup.javapoet.ClassName;
-import com.squareup.javapoet.FieldSpec;
 import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.ParameterizedTypeName;
 import com.squareup.javapoet.TypeName;
@@ -35,8 +34,6 @@ import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
 
 class WriteMapperFull {
-
-    private static final String STATEMENT_PUT_CONSTANT_TO_ENUM_MAPPER = "enumMapperBuilder.put($T.$L, value)";
     private final Element annotatedElement;
     private final TypeElement enumsClassTypeElement;
     private final List<CodeGenEnumConst> enumConstants;
@@ -139,60 +136,19 @@ class WriteMapperFull {
         // package.LauncherAge
         ClassName enumClassName = ClassName.bestGuess(enumsClassTypeElement.toString());
 
-        ClassName stagedBuilderClassName = ClassName.get("", "StagedBuilder");
-        // StagedBuilder<V>
-        ParameterizedTypeName stagedBuilderType = ParameterizedTypeName.get(stagedBuilderClassName,
-                typeVariableName4Value);
-
         ClassName enumMapperClassName = ClassName.get(EnumMapper.class);
         // EnumMapper<LauncherAge, V>
         TypeName lastReturnType = ParameterizedTypeName.get(enumMapperClassName
                 , enumClassName.withoutAnnotations(), typeVariableName4Value);
         addStagedBuilderInterfaces(mapperFullTypeBuilder, typeVariableName4Value, lastReturnType);
 
-        // type for StagedBuilder<V>
-        TypeSpec.Builder stagedBuilderTypeBuilder = TypeSpec.classBuilder(stagedBuilderClassName)
-                .addTypeVariable(typeVariableName4Value)
-                .addModifiers(Modifier.PRIVATE, Modifier.STATIC);
-
-        //private final EnumMapper.Builder<LauncherAge, V> enumMapperBuilder = EnumMapper.builder(LauncherAge.class);
-        ClassName enumMapperBuilderClassName = ClassName.get(EnumMapper.Builder.class);
-        TypeName enumMapperBuilderTypeName = ParameterizedTypeName.get(enumMapperBuilderClassName
-                , enumClassName.withoutAnnotations(), typeVariableName4Value);
-        FieldSpec enumMapperBuilderFieldSpec = FieldSpec.builder(enumMapperBuilderTypeName, "enumMapperBuilder")
-                .addModifiers(Modifier.PRIVATE, Modifier.FINAL)
-                .initializer("EnumMapper.builder($T.class)", enumClassName)
-                .build();
-        stagedBuilderTypeBuilder.addField(enumMapperBuilderFieldSpec);
-
-        // skip the first
-        for (int i = 1; i < enumConstants.size(); i++) {
-            CodeGenEnumConst enumConst = enumConstants.get(i);
-            stagedBuilderTypeBuilder.addSuperinterface(enumConst.interfaceTypeName);
-
-            MethodSpec.Builder interfaceMethodImplBuilder = MethodSpec.methodBuilder(enumConst.setterName)
-                    .addAnnotation(Override.class)
-                    .addModifiers(Modifier.PUBLIC)
-                    .addParameter(typeVariableName4Value, "value")
-                    .addStatement(STATEMENT_PUT_CONSTANT_TO_ENUM_MAPPER, enumClassName, enumConst.identifier);
-
-            if (i == enumConstants.size() - 1) {
-                // the last interface
-                interfaceMethodImplBuilder
-                        .addStatement("return enumMapperBuilder.build()")
-                        .returns(lastReturnType);
-            } else {
-                interfaceMethodImplBuilder
-                        .addStatement("return this")
-                        .returns(enumConstants.get(i + 1).interfaceTypeName);
-            }
-            stagedBuilderTypeBuilder.addMethod(interfaceMethodImplBuilder.build());
-        }
-
-        TypeSpec stagedBuilderTypeSpec = stagedBuilderTypeBuilder.build();
         // add StagedBuilder as inner class
-        mapperFullTypeBuilder.addType(stagedBuilderTypeSpec);
+        StagedBuilder stagedBuilder = new StagedBuilder(typeVariableName4Value
+                , enumClassName, enumConstants, lastReturnType);
+        mapperFullTypeBuilder.addType(stagedBuilder.getTypeSpec());
 
+        // add the staged-builder entry method (for the first enum constant)
+        // it will create a staged-builder instance and return it (as the interface for the next stage)
         CodeGenEnumConst firstEnumConst = enumConstants.get(0);
         CodeGenEnumConst secondEnumConst = enumConstants.get(1);
         MethodSpec setFirstEnum = MethodSpec.methodBuilder(firstEnumConst.setterName)
@@ -200,9 +156,10 @@ class WriteMapperFull {
                 .addTypeVariable(typeVariableName4Value)
                 .returns(secondEnumConst.interfaceTypeName)
                 .addParameter(typeVariableName4Value, "value")
-                .addStatement("$T result = new $T<>()", stagedBuilderType, stagedBuilderClassName)
-                .addStatement("result." + STATEMENT_PUT_CONSTANT_TO_ENUM_MAPPER, enumClassName, firstEnumConst
-                        .identifier)
+                .addStatement("$T result = new $T<>()", stagedBuilder.getFullType(), stagedBuilder.getClassName())
+                .addStatement("result." + StagedBuilder.STATEMENT_PUT_CONSTANT_TO_ENUM_MAPPER, enumClassName,
+                        firstEnumConst
+                                .identifier)
                 .addStatement("return result")
                 .build();
         mapperFullTypeBuilder.addMethod(setFirstEnum);
