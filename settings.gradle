@@ -1,4 +1,5 @@
 rootProject.name = 'enums'
 include 'processor'
 include 'mapper'
+include 'annotations'
 

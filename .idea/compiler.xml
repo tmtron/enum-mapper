@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-    <component name="CompilerConfiguration">
-        <bytecodeTargetLevel>
-            <module name="mapper_main" target="1.8"/>
-            <module name="mapper_test" target="1.8"/>
-            <module name="processor_main" target="1.8"/>
-            <module name="processor_test" target="1.8"/>
-        </bytecodeTargetLevel>
-    </component>
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="annotations_main" target="1.8" />
+      <module name="annotations_test" target="1.8" />
+      <module name="enums_main" target="1.8" />
+      <module name="enums_test" target="1.8" />
+      <module name="mapper_main" target="1.8" />
+      <module name="mapper_test" target="1.8" />
+      <module name="processor_main" target="1.8" />
+      <module name="processor_test" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
 </project>

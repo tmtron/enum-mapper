@@ -53,6 +53,7 @@ class AnnotationProcessingUtil {
      * @return the object cast to a list of T
      * @throws RuntimeException when object is not a list of T
      */
+    @SuppressWarnings("unchecked")
     static <T> List<T> asList(Object object, Class<T> itemsClass, String objName) {
         if (!(object instanceof List<?>)) {
             throw new RuntimeException("The annotation member '" + objName + "' must be an array/list.");
@@ -67,7 +68,6 @@ class AnnotationProcessingUtil {
                 }
         );
         // the loop above has check that all items are okay
-        //noinspection unchecked
         return (List<T>) objList;
     }
 }
