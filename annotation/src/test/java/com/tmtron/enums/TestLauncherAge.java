@@ -17,9 +17,9 @@ public class TestLauncherAge {
 
     @Test
     public void testLauncherAgeGetEnum() throws Exception {
-        assertEquals(LauncherAge.ONLINE, testMapper.getEnum("online"));
-        assertEquals(LauncherAge.OLD, testMapper.getEnum("old"));
-        assertEquals(LauncherAge.OFFLINE, testMapper.getEnum("offline"));
+        assertEquals(LauncherAge.ONLINE, testMapper.getEnumOrRaise("online"));
+        assertEquals(LauncherAge.OLD, testMapper.getEnumOrRaise("old"));
+        assertEquals(LauncherAge.OFFLINE, testMapper.getEnumOrRaise("offline"));
     }
 
     @Test

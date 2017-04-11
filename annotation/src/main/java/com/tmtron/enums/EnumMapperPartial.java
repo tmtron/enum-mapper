@@ -3,14 +3,12 @@ package com.tmtron.enums;
 import java.util.EnumMap;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
- * The EnumMapper allows to associate enum-constants with values.
- * <p> {@link EnumMapper} will make sure that it always has a mapping for each enum-constant.
- * If you forget a mapping, you will get a runtime-exception. When you explicitly want to use only a subset of the
- * available annotations use {@link EnumMapperPartial} instead.
+ * {@link EnumMapperPartial} allows to associate enum-constants with values.
+ * <p> In comparison to {@link EnumMapper} it will not check if all enumerations constans are mapped.
  * </p>
- * To get a compile time check use the {@link MapAllEnums} annotation-processor.
  * <p>
  * Note: this class does not allow for {@code null} values. You may use {@link java.util.Optional} as type.
  * </p>
@@ -18,14 +16,14 @@ import javax.annotation.Nonnull;
  * @param <K> the enum-type
  * @param <V> the type of the values that you want to associate
  */
-public class EnumMapper<K extends Enum<K>, V> extends EnumMapperBase<K, V> {
+public class EnumMapperPartial<K extends Enum<K>, V> extends EnumMapperBase<K, V> {
 
-    private EnumMapper(@Nonnull EnumMap<K, V> enumMap) {
+    private EnumMapperPartial(@Nonnull EnumMap<K, V> enumMap) {
         super(enumMap);
     }
 
     @SuppressWarnings("unchecked")
-    private static <K extends Enum<K>, V> EnumMapper<K, V> ofArgs(Object... varArgs) {
+    private static <K extends Enum<K>, V> EnumMapperPartial<K, V> ofArgs(Object... varArgs) {
 
         K key1 = (K) varArgs[0];
         Builder<K, V> builder = new Builder<>(key1);
@@ -39,29 +37,29 @@ public class EnumMapper<K extends Enum<K>, V> extends EnumMapperBase<K, V> {
     }
 
     public static @Nonnull
-    <K extends Enum<K>, V> EnumMapper<K, V> of(@Nonnull K key1, @Nonnull V val1
+    <K extends Enum<K>, V> EnumMapperPartial<K, V> of(@Nonnull K key1, @Nonnull V val1
             , @Nonnull K key2, @Nonnull V val2) {
-        return EnumMapper.ofArgs(key1, val1
+        return EnumMapperPartial.ofArgs(key1, val1
                 , key2, val2
         );
     }
 
     public static @Nonnull
-    <K extends Enum<K>, V> EnumMapper<K, V> of(@Nonnull K key1, @Nonnull V val1
+    <K extends Enum<K>, V> EnumMapperPartial<K, V> of(@Nonnull K key1, @Nonnull V val1
             , @Nonnull K key2, @Nonnull V val2
             , @Nonnull K key3, @Nonnull V val3) {
-        return EnumMapper.ofArgs(key1, val1
+        return EnumMapperPartial.ofArgs(key1, val1
                 , key2, val2
                 , key3, val3
         );
     }
 
     public static @Nonnull
-    <K extends Enum<K>, V> EnumMapper<K, V> of(@Nonnull K key1, @Nonnull V val1
+    <K extends Enum<K>, V> EnumMapperPartial<K, V> of(@Nonnull K key1, @Nonnull V val1
             , @Nonnull K key2, @Nonnull V val2
             , @Nonnull K key3, @Nonnull V val3
             , @Nonnull K key4, @Nonnull V val4) {
-        return EnumMapper.ofArgs(key1, val1
+        return EnumMapperPartial.ofArgs(key1, val1
                 , key2, val2
                 , key3, val3
                 , key4, val4
@@ -69,12 +67,12 @@ public class EnumMapper<K extends Enum<K>, V> extends EnumMapperBase<K, V> {
     }
 
     public static @Nonnull
-    <K extends Enum<K>, V> EnumMapper<K, V> of(@Nonnull K key1, @Nonnull V val1
+    <K extends Enum<K>, V> EnumMapperPartial<K, V> of(@Nonnull K key1, @Nonnull V val1
             , @Nonnull K key2, @Nonnull V val2
             , @Nonnull K key3, @Nonnull V val3
             , @Nonnull K key4, @Nonnull V val4
             , @Nonnull K key5, @Nonnull V val5) {
-        return EnumMapper.ofArgs(key1, val1
+        return EnumMapperPartial.ofArgs(key1, val1
                 , key2, val2
                 , key3, val3
                 , key4, val4
@@ -83,14 +81,14 @@ public class EnumMapper<K extends Enum<K>, V> extends EnumMapperBase<K, V> {
     }
 
     public static @Nonnull
-    <K extends Enum<K>, V> EnumMapper<K, V> of(@Nonnull K key1, @Nonnull V val1
+    <K extends Enum<K>, V> EnumMapperPartial<K, V> of(@Nonnull K key1, @Nonnull V val1
             , @Nonnull K key2, @Nonnull V val2
             , @Nonnull K key3, @Nonnull V val3
             , @Nonnull K key4, @Nonnull V val4
             , @Nonnull K key5, @Nonnull V val5
             , @Nonnull K key6, @Nonnull V val6
     ) {
-        return EnumMapper.ofArgs(key1, val1
+        return EnumMapperPartial.ofArgs(key1, val1
                 , key2, val2
                 , key3, val3
                 , key4, val4
@@ -100,14 +98,14 @@ public class EnumMapper<K extends Enum<K>, V> extends EnumMapperBase<K, V> {
     }
 
     public static @Nonnull
-    <K extends Enum<K>, V> EnumMapper<K, V> of(@Nonnull K key1, @Nonnull V val1
+    <K extends Enum<K>, V> EnumMapperPartial<K, V> of(@Nonnull K key1, @Nonnull V val1
             , @Nonnull K key2, @Nonnull V val2
             , @Nonnull K key3, @Nonnull V val3
             , @Nonnull K key4, @Nonnull V val4
             , @Nonnull K key5, @Nonnull V val5
             , @Nonnull K key6, @Nonnull V val6
             , @Nonnull K key7, @Nonnull V val7) {
-        return EnumMapper.ofArgs(key1, val1
+        return EnumMapperPartial.ofArgs(key1, val1
                 , key2, val2
                 , key3, val3
                 , key4, val4
@@ -118,7 +116,7 @@ public class EnumMapper<K extends Enum<K>, V> extends EnumMapperBase<K, V> {
     }
 
     public static @Nonnull
-    <K extends Enum<K>, V> EnumMapper<K, V> of(@Nonnull K key1, @Nonnull V val1
+    <K extends Enum<K>, V> EnumMapperPartial<K, V> of(@Nonnull K key1, @Nonnull V val1
             , @Nonnull K key2, @Nonnull V val2
             , @Nonnull K key3, @Nonnull V val3
             , @Nonnull K key4, @Nonnull V val4
@@ -126,7 +124,7 @@ public class EnumMapper<K extends Enum<K>, V> extends EnumMapperBase<K, V> {
             , @Nonnull K key6, @Nonnull V val6
             , @Nonnull K key7, @Nonnull V val7
             , @Nonnull K key8, @Nonnull V val8) {
-        return EnumMapper.ofArgs(key1, val1
+        return EnumMapperPartial.ofArgs(key1, val1
                 , key2, val2
                 , key3, val3
                 , key4, val4
@@ -138,7 +136,7 @@ public class EnumMapper<K extends Enum<K>, V> extends EnumMapperBase<K, V> {
     }
 
     public static @Nonnull
-    <K extends Enum<K>, V> EnumMapper<K, V> of(@Nonnull K key1, @Nonnull V val1
+    <K extends Enum<K>, V> EnumMapperPartial<K, V> of(@Nonnull K key1, @Nonnull V val1
             , @Nonnull K key2, @Nonnull V val2
             , @Nonnull K key3, @Nonnull V val3
             , @Nonnull K key4, @Nonnull V val4
@@ -147,7 +145,7 @@ public class EnumMapper<K extends Enum<K>, V> extends EnumMapperBase<K, V> {
             , @Nonnull K key7, @Nonnull V val7
             , @Nonnull K key8, @Nonnull V val8
             , @Nonnull K key9, @Nonnull V val9) {
-        return EnumMapper.ofArgs(key1, val1
+        return EnumMapperPartial.ofArgs(key1, val1
                 , key2, val2
                 , key3, val3
                 , key4, val4
@@ -169,7 +167,7 @@ public class EnumMapper<K extends Enum<K>, V> extends EnumMapperBase<K, V> {
      * @param <V>       value type
      */
     public static @Nonnull
-    <K extends Enum<K>, V> Builder<K, V> builder(Class<K> enumClass) {
+    <K extends Enum<K>, V> Builder<K, V> builder(@Nonnull Class<K> enumClass) {
         return new Builder<>(enumClass);
     }
 
@@ -190,14 +188,23 @@ public class EnumMapper<K extends Enum<K>, V> extends EnumMapperBase<K, V> {
     }
 
     /**
-     * Returns the value to which the specified key is mapped.
+     * Returns the value to which the specified key is mapped, or {@code null} if this map contains no mapping for the
+     * key.
+     */
+    public @Nullable
+    V getValueOrNull(@Nonnull K enumValue) {
+        return getValueOrNullInternal(enumValue);
+    }
+
+    /**
+     * Returns the value to which the specified key is mapped or the default
      */
     public @Nonnull
-    V getValue(@Nonnull K enumValue) {
+    V getValueOrDefault(@Nonnull K enumValue, @Nonnull V defValue) {
         checkNonnull(enumValue, "enum value must not be null");
-        V result = getValueOrNullInternal(enumValue);
-        // this is a programming error, because this class must make sure that all values are mapped!
-        if (result == null) throw new IllegalStateException("value must not be null");
+        checkNonnull(defValue, "default value must not be null");
+        V result = getValueOrNull(enumValue);
+        if (result == null) return defValue;
         return result;
     }
 
@@ -222,16 +229,8 @@ public class EnumMapper<K extends Enum<K>, V> extends EnumMapperBase<K, V> {
          *
          * @throws IllegalArgumentException when you did not call put for all possible Enum constants
          */
-        public EnumMapper<K, V> build() {
-            K[] enumConstants = enumClass.getEnumConstants();
-            // check that all possible values exist in the map
-            for (Object enumConstant : enumConstants) {
-                //noinspection SuspiciousMethodCalls
-                if (!enumMap.containsKey(enumConstant)) {
-                    throw new IllegalArgumentException("Enum value is not mapped: " + enumConstant.toString());
-                }
-            }
-            return new EnumMapper<>(enumMap);
+        public EnumMapperPartial<K, V> build() {
+            return new EnumMapperPartial<>(enumMap);
         }
     }
 
