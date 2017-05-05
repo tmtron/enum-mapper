@@ -27,7 +27,6 @@ import javax.annotation.processing.ProcessingEnvironment;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.TypeElement;
-import javax.tools.Diagnostic;
 
 /**
  * This class will create the "_MapperFull.java" file (including the staged builder) for one Enum-class
@@ -58,7 +57,9 @@ class MapEnumElement {
     void work() {
         // e.g."com.test.Dummy.BoolEnum.class"
         String msg = "creating MapEnumElement mapper for: " + enumsClassTypeElement.getQualifiedName();
-        processingEnvironment.getMessager().printMessage(Diagnostic.Kind.NOTE, msg);
+        /* NOTE: the android shrinker treats NOTE messages as errors and stops processing with an error!
+         * processingEnvironment.getMessager().printMessage(Diagnostic.Kind.NOTE, msg);
+         */
         if (!ElementKind.ENUM.equals(enumsClassTypeElement.getKind())) {
             throw new RuntimeException(enumsClassTypeElement.toString() + " is not an ENUM kind");
         }
