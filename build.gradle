@@ -19,13 +19,31 @@ plugins {
      *   Android>Lint>Correctness>Obsolete Gradle Dependency
      */
     id 'com.github.ben-manes.versions' version '0.14.0'
+    // for publishing
+    id "com.jfrog.bintray" version "1.7.3"
 }
+
+// https://docs.travis-ci.com/user/environment-variables/
+def isCi = System.getenv("TRAVIS") != null
 
 group 'com.tmtron.enums'
 version '1.0-SNAPSHOT'
+description 'Annotation processor that builds an enum mapper which causes a compile-time error when you forget an enum'
+ext {
+    bintrayDryRun = true
+}
 
 subprojects {
     apply plugin: 'java'
+
+    if (!isCi) {
+        // we don't need the bintray features for the ci build
+        apply from: rootProject.file('gradle/bintray.gradle')
+    }
+
+    /*
+     when I activate the licesne pluign, the bintray plugin creates an invalid pom file!
+     http://stackoverflow.com/questions/43820811/using-the-bintray-plugin-and-license-gradle-plugin-together
 
     apply plugin: "com.github.hierynomus.license"
     license {
@@ -36,24 +54,7 @@ subprojects {
         }
         ext.year = Calendar.getInstance().get(Calendar.YEAR)
     }
-
-    /* create a jar for sources and java-docs
-     * http://stackoverflow.com/a/11475089/6287240
-     */
-    task sourcesJar(type: Jar, dependsOn: classes) {
-        classifier = 'sources'
-        from sourceSets.main.allSource
-    }
-
-    task javadocJar(type: Jar, dependsOn: javadoc) {
-        classifier = 'javadoc'
-        from javadoc.destinationDir
-    }
-
-    artifacts {
-        archives sourcesJar
-        archives javadocJar
-    }
+    */
 }
 
 repositories {
