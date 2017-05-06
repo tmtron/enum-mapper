@@ -23,7 +23,7 @@ public final class LauncherAge_MapperFull {
     }
 
     public interface IsetOFFLINE<V> {
-        EnumMapper<TestLauncherAge.LauncherAge, V> setOFFLINE(V value);
+        EnumMapperFull<TestLauncherAge.LauncherAge, V> setOFFLINE(V value);
     }
 
     public interface IsetOLD<V> {
@@ -31,7 +31,7 @@ public final class LauncherAge_MapperFull {
     }
 
     private static class StagedBuilder<V> implements IsetOLD<V>, IsetOFFLINE<V> {
-        private final EnumMapper.Builder<TestLauncherAge.LauncherAge, V> enumMapperBuilder = EnumMapper.builder
+        private final EnumMapperFull.Builder<TestLauncherAge.LauncherAge, V> enumMapperBuilder = EnumMapperFull.builder
                 (TestLauncherAge.LauncherAge.class);
 
         @Override
@@ -41,7 +41,7 @@ public final class LauncherAge_MapperFull {
         }
 
         @Override
-        public EnumMapper<TestLauncherAge.LauncherAge, V> setOFFLINE(V value) {
+        public EnumMapperFull<TestLauncherAge.LauncherAge, V> setOFFLINE(V value) {
             enumMapperBuilder.put(TestLauncherAge.LauncherAge.OFFLINE, value);
             return enumMapperBuilder.build();
         }

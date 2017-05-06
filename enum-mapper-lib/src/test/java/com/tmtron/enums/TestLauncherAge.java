@@ -25,7 +25,7 @@ public class TestLauncherAge {
         ONLINE, OLD, OFFLINE
     }
 
-    EnumMapper<LauncherAge, String> testMapper = LauncherAge_MapperFull
+    EnumMapperFull<LauncherAge, String> testMapper = LauncherAge_MapperFull
             .setONLINE("online")
             .setOLD("old")
             .setOFFLINE("offline");

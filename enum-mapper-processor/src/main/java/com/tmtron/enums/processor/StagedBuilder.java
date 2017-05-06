@@ -22,7 +22,7 @@ import com.squareup.javapoet.ParameterizedTypeName;
 import com.squareup.javapoet.TypeName;
 import com.squareup.javapoet.TypeSpec;
 import com.squareup.javapoet.TypeVariableName;
-import com.tmtron.enums.EnumMapper;
+import com.tmtron.enums.EnumMapperFull;
 
 import java.util.List;
 
@@ -46,7 +46,7 @@ class StagedBuilder {
      * @param typeVariableName4Value the type-variable name: e.g. "V"
      * @param enumClassName          e.g package.LauncherAge
      * @param enumConstants          all enum constants
-     * @param lastReturnType         the return type for the last stage: e.g. EnumMapper<LauncherAge, V>
+     * @param lastReturnType         the return type for the last stage: e.g. EnumMapperFull<LauncherAge, V>
      */
     StagedBuilder(TypeVariableName typeVariableName4Value, ClassName enumClassName
             , List<CodeGenEnumConst> enumConstants, TypeName lastReturnType) {
@@ -118,14 +118,15 @@ class StagedBuilder {
 
     }
 
-    //private final EnumMapper.Builder<LauncherAge, V> enumMapperBuilder = EnumMapper.builder(LauncherAge.class);
+    //private final EnumMapperFull.Builder<LauncherAge, V> enumMapperBuilder = EnumMapperFull.builder(LauncherAge
+    // .class);
     private FieldSpec getEnumMapperBuilderFieldSpec() {
-        ClassName enumMapperBuilderClassName = ClassName.get(EnumMapper.Builder.class);
+        ClassName enumMapperBuilderClassName = ClassName.get(EnumMapperFull.Builder.class);
         TypeName enumMapperBuilderTypeName = ParameterizedTypeName.get(enumMapperBuilderClassName
                 , enumClassName.withoutAnnotations(), typeVariableName4Value);
         return FieldSpec.builder(enumMapperBuilderTypeName, "enumMapperBuilder")
                 .addModifiers(Modifier.PRIVATE, Modifier.FINAL)
-                .initializer("EnumMapper.builder($T.class)", enumClassName)
+                .initializer("EnumMapperFull.builder($T.class)", enumClassName)
                 .build();
     }
 

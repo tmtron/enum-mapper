@@ -20,27 +20,27 @@ import java.util.EnumMap;
 import javax.annotation.Nonnull;
 
 /**
- * The EnumMapper allows to associate enum-constants with values.
- * <p> {@link EnumMapper} will make sure that it always has a mapping for each enum-constant.
+ * The EnumMapperFull allows to associate enum-constants with values.
+ * <p> {@link EnumMapperFull} will make sure that it always has a mapping for each enum-constant.
  * If you forget a mapping, you will get a runtime-exception. When you explicitly want to use only a subset of the
  * available annotations use {@link EnumMapperPartial} instead.
  * </p>
  * To get a compile time check use the {@link EnumMappers} annotation-processor.
  * <p>
- * Note: this class does not allow for {@code null} values. You may use {@link java.util.Optional} as type.
+ * Note: this class does not allow for {@code null} values. You may use {@code java.util.Optional} as type.
  * </p>
  *
  * @param <K> the enum-type
  * @param <V> the type of the values that you want to associate
  */
-public class EnumMapper<K extends Enum<K>, V> extends EnumMapperBase<K, V> {
+public class EnumMapperFull<K extends Enum<K>, V> extends EnumMapperBase<K, V> {
 
-    private EnumMapper(@Nonnull EnumMap<K, V> enumMap) {
+    private EnumMapperFull(@Nonnull EnumMap<K, V> enumMap) {
         super(enumMap);
     }
 
     @SuppressWarnings("unchecked")
-    private static <K extends Enum<K>, V> EnumMapper<K, V> ofArgs(Object... varArgs) {
+    private static <K extends Enum<K>, V> EnumMapperFull<K, V> ofArgs(Object... varArgs) {
 
         K key1 = (K) varArgs[0];
         Builder<K, V> builder = new Builder<>(key1);
@@ -54,29 +54,29 @@ public class EnumMapper<K extends Enum<K>, V> extends EnumMapperBase<K, V> {
     }
 
     public static @Nonnull
-    <K extends Enum<K>, V> EnumMapper<K, V> of(@Nonnull K key1, @Nonnull V val1
+    <K extends Enum<K>, V> EnumMapperFull<K, V> of(@Nonnull K key1, @Nonnull V val1
             , @Nonnull K key2, @Nonnull V val2) {
-        return EnumMapper.ofArgs(key1, val1
+        return EnumMapperFull.ofArgs(key1, val1
                 , key2, val2
         );
     }
 
     public static @Nonnull
-    <K extends Enum<K>, V> EnumMapper<K, V> of(@Nonnull K key1, @Nonnull V val1
+    <K extends Enum<K>, V> EnumMapperFull<K, V> of(@Nonnull K key1, @Nonnull V val1
             , @Nonnull K key2, @Nonnull V val2
             , @Nonnull K key3, @Nonnull V val3) {
-        return EnumMapper.ofArgs(key1, val1
+        return EnumMapperFull.ofArgs(key1, val1
                 , key2, val2
                 , key3, val3
         );
     }
 
     public static @Nonnull
-    <K extends Enum<K>, V> EnumMapper<K, V> of(@Nonnull K key1, @Nonnull V val1
+    <K extends Enum<K>, V> EnumMapperFull<K, V> of(@Nonnull K key1, @Nonnull V val1
             , @Nonnull K key2, @Nonnull V val2
             , @Nonnull K key3, @Nonnull V val3
             , @Nonnull K key4, @Nonnull V val4) {
-        return EnumMapper.ofArgs(key1, val1
+        return EnumMapperFull.ofArgs(key1, val1
                 , key2, val2
                 , key3, val3
                 , key4, val4
@@ -84,12 +84,12 @@ public class EnumMapper<K extends Enum<K>, V> extends EnumMapperBase<K, V> {
     }
 
     public static @Nonnull
-    <K extends Enum<K>, V> EnumMapper<K, V> of(@Nonnull K key1, @Nonnull V val1
+    <K extends Enum<K>, V> EnumMapperFull<K, V> of(@Nonnull K key1, @Nonnull V val1
             , @Nonnull K key2, @Nonnull V val2
             , @Nonnull K key3, @Nonnull V val3
             , @Nonnull K key4, @Nonnull V val4
             , @Nonnull K key5, @Nonnull V val5) {
-        return EnumMapper.ofArgs(key1, val1
+        return EnumMapperFull.ofArgs(key1, val1
                 , key2, val2
                 , key3, val3
                 , key4, val4
@@ -98,14 +98,14 @@ public class EnumMapper<K extends Enum<K>, V> extends EnumMapperBase<K, V> {
     }
 
     public static @Nonnull
-    <K extends Enum<K>, V> EnumMapper<K, V> of(@Nonnull K key1, @Nonnull V val1
+    <K extends Enum<K>, V> EnumMapperFull<K, V> of(@Nonnull K key1, @Nonnull V val1
             , @Nonnull K key2, @Nonnull V val2
             , @Nonnull K key3, @Nonnull V val3
             , @Nonnull K key4, @Nonnull V val4
             , @Nonnull K key5, @Nonnull V val5
             , @Nonnull K key6, @Nonnull V val6
     ) {
-        return EnumMapper.ofArgs(key1, val1
+        return EnumMapperFull.ofArgs(key1, val1
                 , key2, val2
                 , key3, val3
                 , key4, val4
@@ -115,14 +115,14 @@ public class EnumMapper<K extends Enum<K>, V> extends EnumMapperBase<K, V> {
     }
 
     public static @Nonnull
-    <K extends Enum<K>, V> EnumMapper<K, V> of(@Nonnull K key1, @Nonnull V val1
+    <K extends Enum<K>, V> EnumMapperFull<K, V> of(@Nonnull K key1, @Nonnull V val1
             , @Nonnull K key2, @Nonnull V val2
             , @Nonnull K key3, @Nonnull V val3
             , @Nonnull K key4, @Nonnull V val4
             , @Nonnull K key5, @Nonnull V val5
             , @Nonnull K key6, @Nonnull V val6
             , @Nonnull K key7, @Nonnull V val7) {
-        return EnumMapper.ofArgs(key1, val1
+        return EnumMapperFull.ofArgs(key1, val1
                 , key2, val2
                 , key3, val3
                 , key4, val4
@@ -133,7 +133,7 @@ public class EnumMapper<K extends Enum<K>, V> extends EnumMapperBase<K, V> {
     }
 
     public static @Nonnull
-    <K extends Enum<K>, V> EnumMapper<K, V> of(@Nonnull K key1, @Nonnull V val1
+    <K extends Enum<K>, V> EnumMapperFull<K, V> of(@Nonnull K key1, @Nonnull V val1
             , @Nonnull K key2, @Nonnull V val2
             , @Nonnull K key3, @Nonnull V val3
             , @Nonnull K key4, @Nonnull V val4
@@ -141,7 +141,7 @@ public class EnumMapper<K extends Enum<K>, V> extends EnumMapperBase<K, V> {
             , @Nonnull K key6, @Nonnull V val6
             , @Nonnull K key7, @Nonnull V val7
             , @Nonnull K key8, @Nonnull V val8) {
-        return EnumMapper.ofArgs(key1, val1
+        return EnumMapperFull.ofArgs(key1, val1
                 , key2, val2
                 , key3, val3
                 , key4, val4
@@ -153,7 +153,7 @@ public class EnumMapper<K extends Enum<K>, V> extends EnumMapperBase<K, V> {
     }
 
     public static @Nonnull
-    <K extends Enum<K>, V> EnumMapper<K, V> of(@Nonnull K key1, @Nonnull V val1
+    <K extends Enum<K>, V> EnumMapperFull<K, V> of(@Nonnull K key1, @Nonnull V val1
             , @Nonnull K key2, @Nonnull V val2
             , @Nonnull K key3, @Nonnull V val3
             , @Nonnull K key4, @Nonnull V val4
@@ -162,7 +162,7 @@ public class EnumMapper<K extends Enum<K>, V> extends EnumMapperBase<K, V> {
             , @Nonnull K key7, @Nonnull V val7
             , @Nonnull K key8, @Nonnull V val8
             , @Nonnull K key9, @Nonnull V val9) {
-        return EnumMapper.ofArgs(key1, val1
+        return EnumMapperFull.ofArgs(key1, val1
                 , key2, val2
                 , key3, val3
                 , key4, val4
@@ -237,7 +237,7 @@ public class EnumMapper<K extends Enum<K>, V> extends EnumMapperBase<K, V> {
          *
          * @throws IllegalArgumentException when you did not call put for all possible Enum constants
          */
-        public EnumMapper<K, V> build() {
+        public EnumMapperFull<K, V> build() {
             K[] enumConstants = enumClass.getEnumConstants();
             // check that all possible values exist in the map
             for (Object enumConstant : enumConstants) {
@@ -246,7 +246,7 @@ public class EnumMapper<K extends Enum<K>, V> extends EnumMapperBase<K, V> {
                     throw new IllegalArgumentException("Enum value is not mapped: " + enumConstant.toString());
                 }
             }
-            return new EnumMapper<>(enumMap);
+            return new EnumMapperFull<>(enumMap);
         }
     }
 

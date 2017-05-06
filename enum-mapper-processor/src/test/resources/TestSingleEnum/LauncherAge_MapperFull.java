@@ -15,7 +15,7 @@
  */
 package com.test;
 
-import com.tmtron.enums.EnumMapper;
+import com.tmtron.enums.EnumMapperFull;
 
 import javax.annotation.Generated;
 
@@ -32,7 +32,7 @@ public final class LauncherAge_MapperFull {
     }
 
     public interface IsetOFFLINE<V> {
-        EnumMapper<LauncherAge_Source.LauncherAge, V> setOFFLINE(V value);
+        EnumMapperFull<LauncherAge_Source.LauncherAge, V> setOFFLINE(V value);
     }
 
     public interface IsetOLD<V> {
@@ -40,8 +40,9 @@ public final class LauncherAge_MapperFull {
     }
 
     private static class StagedBuilder<V> implements IsetOLD<V>, IsetOFFLINE<V> {
-        private final EnumMapper.Builder<LauncherAge_Source.LauncherAge, V> enumMapperBuilder = EnumMapper.builder
-                (LauncherAge_Source.LauncherAge.class);
+        private final EnumMapperFull.Builder<LauncherAge_Source.LauncherAge, V> enumMapperBuilder = EnumMapperFull
+                .builder
+                        (LauncherAge_Source.LauncherAge.class);
 
         @Override
         public IsetOFFLINE<V> setOLD(V value) {
@@ -50,7 +51,7 @@ public final class LauncherAge_MapperFull {
         }
 
         @Override
-        public EnumMapper<LauncherAge_Source.LauncherAge, V> setOFFLINE(V value) {
+        public EnumMapperFull<LauncherAge_Source.LauncherAge, V> setOFFLINE(V value) {
             enumMapperBuilder.put(LauncherAge_Source.LauncherAge.OFFLINE, value);
             return enumMapperBuilder.build();
         }

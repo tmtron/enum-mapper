@@ -30,15 +30,15 @@ public final class BoolEnum_MapperFull {
     }
 
     public interface IsetON<V> {
-        EnumMapper<TwoEnums_Source.BoolEnum, V> setON(V value);
+        EnumMapperFull<TwoEnums_Source.BoolEnum, V> setON(V value);
     }
 
     private static class StagedBuilder<V> implements IsetON<V> {
-        private final EnumMapper.Builder<TwoEnums_Source.BoolEnum, V> enumMapperBuilder = EnumMapper.builder
+        private final EnumMapperFull.Builder<TwoEnums_Source.BoolEnum, V> enumMapperBuilder = EnumMapperFull.builder
                 (TwoEnums_Source.BoolEnum.class);
 
         @Override
-        public EnumMapper<TwoEnums_Source.BoolEnum, V> setON(V value) {
+        public EnumMapperFull<TwoEnums_Source.BoolEnum, V> setON(V value) {
             enumMapperBuilder.put(TwoEnums_Source.BoolEnum.ON, value);
             return enumMapperBuilder.build();
         }

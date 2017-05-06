@@ -30,15 +30,15 @@ public final class ColorEnum_MapperFull {
     }
 
     public interface IsetBLUE<V> {
-        EnumMapper<TwoEnums_Source.ColorEnum, V> setBLUE(V value);
+        EnumMapperFull<TwoEnums_Source.ColorEnum, V> setBLUE(V value);
     }
 
     private static class StagedBuilder<V> implements IsetBLUE<V> {
-        private final EnumMapper.Builder<TwoEnums_Source.ColorEnum, V> enumMapperBuilder = EnumMapper.builder
+        private final EnumMapperFull.Builder<TwoEnums_Source.ColorEnum, V> enumMapperBuilder = EnumMapperFull.builder
                 (TwoEnums_Source.ColorEnum.class);
 
         @Override
-        public EnumMapper<TwoEnums_Source.ColorEnum, V> setBLUE(V value) {
+        public EnumMapperFull<TwoEnums_Source.ColorEnum, V> setBLUE(V value) {
             enumMapperBuilder.put(TwoEnums_Source.ColorEnum.BLUE, value);
             return enumMapperBuilder.build();
         }

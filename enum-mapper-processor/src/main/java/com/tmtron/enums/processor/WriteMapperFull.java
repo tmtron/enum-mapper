@@ -23,7 +23,7 @@ import com.squareup.javapoet.ParameterizedTypeName;
 import com.squareup.javapoet.TypeName;
 import com.squareup.javapoet.TypeSpec;
 import com.squareup.javapoet.TypeVariableName;
-import com.tmtron.enums.EnumMapper;
+import com.tmtron.enums.EnumMapperFull;
 
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -80,7 +80,7 @@ class WriteMapperFull {
      *
      * @param mapperFullTypeBuilder  the interfaces will be added to this builder
      * @param typeVariableName4Value the type-variable name: e.g. "V"
-     * @param lastReturnType         the return type for the last stage: e.g. EnumMapper<LauncherAge, V>
+     * @param lastReturnType         the return type for the last stage: e.g. EnumMapperFull<LauncherAge, V>
      */
     private void addStagedBuilderInterfaces(TypeSpec.Builder mapperFullTypeBuilder
             , TypeVariableName typeVariableName4Value, TypeName lastReturnType) {
@@ -136,8 +136,8 @@ class WriteMapperFull {
         // package.LauncherAge
         ClassName enumClassName = ClassName.bestGuess(enumsClassTypeElement.toString());
 
-        ClassName enumMapperClassName = ClassName.get(EnumMapper.class);
-        // EnumMapper<LauncherAge, V>
+        ClassName enumMapperClassName = ClassName.get(EnumMapperFull.class);
+        // EnumMapperFull<LauncherAge, V>
         TypeName lastReturnType = ParameterizedTypeName.get(enumMapperClassName
                 , enumClassName.withoutAnnotations(), typeVariableName4Value);
         addStagedBuilderInterfaces(mapperFullTypeBuilder, typeVariableName4Value, lastReturnType);

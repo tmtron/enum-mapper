@@ -17,29 +17,81 @@ package com.tmtron.enums;
 
 import org.junit.Test;
 
+import static com.tmtron.enums.TestEnumMapperFull.Nine.I1;
+import static com.tmtron.enums.TestEnumMapperFull.Nine.I2;
+import static com.tmtron.enums.TestEnumMapperFull.Nine.I3;
+import static com.tmtron.enums.TestEnumMapperFull.Nine.I4;
+import static com.tmtron.enums.TestEnumMapperFull.Nine.I5;
+import static com.tmtron.enums.TestEnumMapperFull.Nine.I6;
+import static com.tmtron.enums.TestEnumMapperFull.Nine.I7;
+import static com.tmtron.enums.TestEnumMapperFull.Nine.I8;
+import static com.tmtron.enums.TestEnumMapperFull.Nine.I9;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 public class TestEnumMapperFull {
 
-    @Test
-    public void testBool() throws Exception {
-        EnumMapper<TwoEnums_Source.BoolEnum, String> boolMapper = BoolEnum_MapperFull.setOFF("off")
-                .setON("on");
-        assertEquals(TwoEnums_Source.BoolEnum.OFF, boolMapper.getEnumOrRaise("off"));
-        assertEquals(TwoEnums_Source.BoolEnum.ON, boolMapper.getEnumOrRaise("on"));
+    enum Nine {I1, I2, I3, I4, I5, I6, I7, I8, I9}
 
-        assertEquals("off", boolMapper.getValue(TwoEnums_Source.BoolEnum.OFF));
-        assertEquals("on", boolMapper.getValue(TwoEnums_Source.BoolEnum.ON));
+    private EnumMapperFull<Nine, Integer> fullMapper = EnumMapperFull.of(I1, 1, Nine.I2, 2, I3, 3
+            , I4, 4, I5, 5, I6, 6, I7, 7, I8, 8, I9, 9);
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testMapperOfThrowsOnMissingValues2() {
+        EnumMapperFull.of(I1, 1, Nine.I2, 2);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testMapperOfThrowsOnMissingValues3() {
+        EnumMapperFull.of(I1, 1, Nine.I2, 2, I3, 3);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testMapperOfThrowsOnMissingValues4() {
+        EnumMapperFull.of(I1, 1, Nine.I2, 2, I3, 3, I4, 4);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testMapperOfThrowsOnMissingValues5() {
+        EnumMapperFull.of(I1, 1, Nine.I2, 2, I3, 3, I4, 4, I5, 5);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testMapperOfThrowsOnMissingValues6() {
+        EnumMapperFull.of(I1, 1, Nine.I2, 2, I3, 3, I4, 4, I5, 5, I6, 6);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testMapperOfThrowsOnMissingValues7() {
+        EnumMapperFull.of(I1, 1, Nine.I2, 2, I3, 3, I4, 4, I5, 5, I6, 6, I7, 7);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testMapperOfThrowsOnMissingValues8() {
+        EnumMapperFull.of(I1, 1, Nine.I2, 2, I3, 3, I4, 4, I5, 5, I6, 6, I7, 7
+                , I8, 8);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testBuilderThrowsOnMissingValues() throws Exception {
+        EnumMapperFull<Nine, String> mapper = EnumMapperFull.builder(I1, "1")
+                .put(I2, "2")
+                .build();
     }
 
     @Test
-    public void testColor() throws Exception {
-        EnumMapper<TwoEnums_Source.ColorEnum, String> boolMapper = ColorEnum_MapperFull.setRED("red")
-                .setBLUE("blue");
-        assertEquals(TwoEnums_Source.ColorEnum.RED, boolMapper.getEnumOrRaise("red"));
-        assertEquals(TwoEnums_Source.ColorEnum.BLUE, boolMapper.getEnumOrRaise("blue"));
-
-        assertEquals("red", boolMapper.getValue(TwoEnums_Source.ColorEnum.RED));
-        assertEquals("blue", boolMapper.getValue(TwoEnums_Source.ColorEnum.BLUE));
+    public void testGetOrDefault() throws Exception {
+        assertEquals(I7, fullMapper.getEnumOrDefault(77, I7));
     }
+
+    @Test
+    public void testGetOrNull() throws Exception {
+        assertNull(fullMapper.getEnumOrNull(77));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testGetOrRaise() throws Exception {
+        fullMapper.getEnumOrRaise(77);
+    }
+
 }
