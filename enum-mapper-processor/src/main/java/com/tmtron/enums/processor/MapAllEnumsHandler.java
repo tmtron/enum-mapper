@@ -31,12 +31,12 @@ import javax.lang.model.type.TypeMirror;
 
 /**
  * Will handle a single {@link com.tmtron.enums.MapAllEnums} annotation.
- * Which may contain multiple Enum classes in the enums class array.
+ * Which may contain multiple Enum classes in the value class array.
  */
 class MapAllEnumsHandler {
 
-    // the MapAllEnums class must have a member named enums (array of Enum classes)
-    private static final String ENUMS_ID = "enums";
+    // the MapAllEnums class must have a member named value (array of Enum classes)
+    private static final String ENUMS_ID = "value";
     private final AnnotationMirror annotationMirrorMapAllEnums;
     private final ProcessingEnvironment processingEnvironment;
     private final Element annotatedElement;
@@ -60,18 +60,18 @@ class MapAllEnumsHandler {
     }
 
     void work() {
-        // get the "enums" annotationValue (which is of type: array of classes)
+        // get the "value" annotationValue (which is of type: array of classes)
         AnnotationValue annotationValue = AnnotationProcessingUtil.getRequiredAnnotationValue
                 (annotationMirrorMapAllEnums, ENUMS_ID);
 
         // the annotationValue is an array of classes
         // we convert it to a list where each item is the class
-        // e.g. "enums" -> {com.test.Dummy.ColorEnum.class, com.test.Dummy.BoolEnum.class}
+        // e.g. "value" -> {com.test.Dummy.ColorEnum.class, com.test.Dummy.BoolEnum.class}
         //      --> the enumsList will contain 2 items (ColorEnum and BoolEnum)
         List<? extends AnnotationValue> enumsList = AnnotationProcessingUtil.asList(annotationValue.getValue(),
                 AnnotationValue.class, ENUMS_ID);
 
-        // loop over each (Enum-)class in the "enums" array
+        // loop over each (Enum-)class in the "value" array
         for (AnnotationValue enumsClassAnnotationValue : enumsList) {
             TypeMirror enumsClassTypeMirror = (TypeMirror) enumsClassAnnotationValue.getValue();
             TypeElement enumsClassTypeElement = MoreTypes.asTypeElement(enumsClassTypeMirror);

@@ -49,7 +49,7 @@ class AnnotationProcessingUtil {
         for (Map.Entry<? extends ExecutableElement, ? extends AnnotationValue> entry :
                 annotationMirror.getElementValues().entrySet()) {
             if (elementNameSimple.equals(entry.getKey().getSimpleName().toString())) {
-                // e.g. "enums" -> {com.test.Dummy.ColorEnum.class, com.test.Dummy.BoolEnum.class}
+                // e.g. "value" -> {com.test.Dummy.ColorEnum.class, com.test.Dummy.BoolEnum.class}
                 return entry.getValue();
             }
         }
