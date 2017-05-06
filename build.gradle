@@ -34,7 +34,16 @@ ext {
 }
 
 subprojects {
+
+    repositories {
+        mavenCentral()
+    }
+
     apply plugin: 'java'
+
+    dependencies {
+        testCompile group: 'junit', name: 'junit', version: '4.12'
+    }
 
     if (!isCi) {
         // we don't need the bintray features for the ci build
@@ -57,7 +66,4 @@ subprojects {
     */
 }
 
-repositories {
-    mavenCentral()
-}
 
