@@ -27,10 +27,10 @@ plugins {
 def isCi = System.getenv("TRAVIS") != null
 
 group 'com.tmtron.enums'
-version '1.0-SNAPSHOT'
+version '1.0.0'
 description 'Annotation processor that builds an enum mapper which causes a compile-time error when you forget an enum'
 ext {
-    bintrayDryRun = true
+    bintrayDryRun = false
 }
 
 subprojects {
