@@ -17,9 +17,9 @@ package com.test;
 
 // comment
 
-import com.tmtron.enums.MapAllEnums;
+import com.tmtron.enums.EnumMappers;
 
-@MapAllEnums({TwoEnums_Source.BoolEnum.class, TwoEnums_Source.ColorEnum.class})
+@EnumMappers({TwoEnums_Source.BoolEnum.class, TwoEnums_Source.ColorEnum.class})
 public class TwoEnums_Source {
     enum BoolEnum {OFF, ON}
 

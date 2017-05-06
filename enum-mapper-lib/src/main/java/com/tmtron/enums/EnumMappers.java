@@ -22,6 +22,6 @@ import java.lang.annotation.Target;
 
 @Target({ElementType.PACKAGE, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface MapAllEnums {
+public @interface EnumMappers {
     Class<? extends Enum<?>>[] value();
 }

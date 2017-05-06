@@ -17,9 +17,9 @@ package com.test;
 
 // comment"
 
-import com.tmtron.enums.MapAllEnums;
+import com.tmtron.enums.EnumMappers;
 
-@MapAllEnums(LauncherAge_Source.LauncherAge.class)
+@EnumMappers(LauncherAge_Source.LauncherAge.class)
 public class LauncherAge_Source {
     enum LauncherAge {ONLINE, OLD, OFFLINE}
 }

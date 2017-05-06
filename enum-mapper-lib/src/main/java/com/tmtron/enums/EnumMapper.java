@@ -25,7 +25,7 @@ import javax.annotation.Nonnull;
  * If you forget a mapping, you will get a runtime-exception. When you explicitly want to use only a subset of the
  * available annotations use {@link EnumMapperPartial} instead.
  * </p>
- * To get a compile time check use the {@link MapAllEnums} annotation-processor.
+ * To get a compile time check use the {@link EnumMappers} annotation-processor.
  * <p>
  * Note: this class does not allow for {@code null} values. You may use {@link java.util.Optional} as type.
  * </p>

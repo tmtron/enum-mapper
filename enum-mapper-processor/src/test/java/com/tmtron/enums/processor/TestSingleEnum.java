@@ -37,7 +37,7 @@ public class TestSingleEnum extends AnnotationProcessorTest {
                 .processedWith(new EnumsAnnotationProcessor())
                 .compilesWithoutError()
                 .withWarningContaining(
-                        "No processor claimed any of these annotations: com.tmtron.enums.MapAllEnums");
+                        "No processor claimed any of these annotations: com.tmtron.enums.EnumMappers");
     }
 
     @Test

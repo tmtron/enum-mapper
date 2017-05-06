@@ -17,7 +17,7 @@ package com.tmtron.enums.processor;
 
 import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.TypeVariableName;
-import com.tmtron.enums.MapAllEnums;
+import com.tmtron.enums.EnumMappers;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -40,11 +40,11 @@ class MapEnumElement {
     private final TypeVariableName typeVariableName4Value;
 
     /**
-     * Will process a single Enum class of the {@link com.tmtron.enums.MapAllEnums} annotation.
+     * Will process a single Enum class of the {@link EnumMappers} annotation.
      *
      * @param processingEnvironment the processing environment
-     * @param annotatedElement      the element (e.g. class) which has the {@link MapAllEnums} annotation
-     * @param enumsClassTypeElement a single Enum class from the "values" array of the {@link MapAllEnums} annotation
+     * @param annotatedElement      the element (e.g. class) which has the {@link EnumMappers} annotation
+     * @param enumsClassTypeElement a single Enum class from the "values" array of the {@link EnumMappers} annotation
      */
     MapEnumElement(ProcessingEnvironment processingEnvironment, Element annotatedElement,
                    TypeElement enumsClassTypeElement) {

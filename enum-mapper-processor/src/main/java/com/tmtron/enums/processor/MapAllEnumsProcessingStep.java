@@ -17,7 +17,7 @@ package com.tmtron.enums.processor;
 
 import com.google.auto.common.BasicAnnotationProcessor;
 import com.google.common.collect.SetMultimap;
-import com.tmtron.enums.MapAllEnums;
+import com.tmtron.enums.EnumMappers;
 
 import java.lang.annotation.Annotation;
 import java.util.Collections;
@@ -28,7 +28,7 @@ import javax.lang.model.element.Element;
 import javax.tools.Diagnostic;
 
 /**
- * Processing step for the {@link MapAllEnums} annotation
+ * Processing step for the {@link EnumMappers} annotation
  */
 public class MapAllEnumsProcessingStep implements BasicAnnotationProcessor.ProcessingStep {
 
@@ -40,21 +40,21 @@ public class MapAllEnumsProcessingStep implements BasicAnnotationProcessor.Proce
 
     @Override
     public Set<? extends Class<? extends Annotation>> annotations() {
-        return Collections.singleton(MapAllEnums.class);
+        return Collections.singleton(EnumMappers.class);
     }
 
     @Override
     public Set<Element> process(SetMultimap<Class<? extends Annotation>, Element> elementsByAnnotation) {
         try {
-            // the annotations method tells the framework to only accept the MapAllEnums annotation
+            // the annotations method tells the framework to only accept the EnumMappers annotation
             if (elementsByAnnotation.keys().size() != 1) throw new RuntimeException("Exactly one annotation expected");
             Class<? extends Annotation> annotation = elementsByAnnotation.keys().iterator().next();
-            if (!annotation.getName().equals(MapAllEnums.class.getCanonicalName())) {
+            if (!annotation.getName().equals(EnumMappers.class.getCanonicalName())) {
                 throw new RuntimeException("Unexpected class found: '" + annotation.getName() + "'"
-                        + " Expected class: " + MapAllEnums.class.getCanonicalName());
+                        + " Expected class: " + EnumMappers.class.getCanonicalName());
             }
 
-            // the MapAllEnums annotation may be present on multiple classes
+            // the EnumMappers annotation may be present on multiple classes
             for (Element element : elementsByAnnotation.get(annotation)) {
                 try {
                     new MapAllEnumsHandler(processingEnvironment, element).work();

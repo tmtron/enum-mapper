@@ -57,7 +57,7 @@ class AnnotationProcessorTest {
         return Truth.assertAbout(JavaSourceSubjectFactory.javaSource())
                 .that(source)
                 // otherwise we get this warning:
-                // No processor claimed any of these annotations: com.tmtron.enums.annotation.MapAllEnums
+                // No processor claimed any of these annotations: com.tmtron.enums.annotation.EnumMappers
                 .withCompilerOptions("-Xlint:-processing")
                 .processedWith(new EnumsAnnotationProcessor());
     }
