@@ -5,8 +5,10 @@ apply plugin: 'com.jfrog.bintray'
 def vcProvider = 'github'
 def vcProviderUser = 'tmtron'
 def vcProviderProject = 'enum-mapper'
+def vcGithubRepo = "${vcProviderUser}/${vcProviderProject}"
 // e.g. https://github.com/tmtron/enum-mapper
 def vcProviderUrl = "https://${vcProvider}.com/${vcProviderUser}/${vcProviderProject}"
+def vcProviderIssuesUrl = "${vcProviderUrl}/issues"
 def vcProviderScmUrl = "scm:git:${vcProviderUrl}.git"
 def bintrayPackage = "com.tmtron.${vcProviderProject}"
 
@@ -18,12 +20,20 @@ bintray {
     pkg {
         repo = 'maven'
         name = bintrayPackage
+        desc = "$project.description"
         licenses = ['Apache-2.0']
+        websiteUrl = vcProviderUrl
+        issueTrackerUrl = vcProviderIssuesUrl
         vcsUrl = vcProviderScmUrl
+
+        githubRepo = vcGithubRepo
+        githubReleaseNotesFile = 'README.md' //Optional Github readme file
+
         version {
             name = "$project.version"
+            released = new Date()
             gpg {
-                sign = true
+                sign = true //Determines whether to GPG sign the files. The default is false
             }
         }
     }
