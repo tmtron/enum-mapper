@@ -22,7 +22,7 @@ import org.junit.Test;
 
 import javax.tools.JavaFileObject;
 
-public class TestSingleEnum extends AnnotationProcessorTest {
+public class TestMappers4SingleEnum extends AnnotationProcessorTest {
 
     private final JavaFileObject source = getJfoResource("LauncherAge_Source.java");
 

@@ -16,7 +16,10 @@
 package com.tmtron.enums.processor;
 
 import com.google.auto.common.BasicAnnotationProcessor;
+import com.google.auto.common.MoreTypes;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.SetMultimap;
+import com.tmtron.enums.EnumMapper;
 import com.tmtron.enums.EnumMappers;
 
 import java.lang.annotation.Annotation;
@@ -25,6 +28,9 @@ import java.util.Set;
 
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.lang.model.element.Element;
+import javax.lang.model.element.ElementKind;
+import javax.lang.model.element.TypeElement;
+import javax.lang.model.type.TypeMirror;
 import javax.tools.Diagnostic;
 
 /**
@@ -40,36 +46,68 @@ public class MapAllEnumsProcessingStep implements BasicAnnotationProcessor.Proce
 
     @Override
     public Set<? extends Class<? extends Annotation>> annotations() {
-        return Collections.singleton(EnumMappers.class);
+        return ImmutableSet.of(EnumMapper.class, EnumMappers.class);
     }
 
     @Override
     public Set<Element> process(SetMultimap<Class<? extends Annotation>, Element> elementsByAnnotation) {
         try {
-            // the annotations method tells the framework to only accept the EnumMappers annotation
-            if (elementsByAnnotation.keys().size() != 1) throw new RuntimeException("Exactly one annotation expected");
+            // the annotations() method tells the framework which annotations to accept
+            if (elementsByAnnotation.keys().size() > 2) throw new RuntimeException("Too many annotations");
+
             Class<? extends Annotation> annotation = elementsByAnnotation.keys().iterator().next();
-            if (!annotation.getName().equals(EnumMappers.class.getCanonicalName())) {
-                throw new RuntimeException("Unexpected class found: '" + annotation.getName() + "'"
-                        + " Expected class: " + EnumMappers.class.getCanonicalName());
-            }
+            // the elements which are annotated with the annotation
+            // e.g. the EnumMappers annotation may be present on multiple classes of packages
+            Set<Element> annotatedElements = elementsByAnnotation.get(annotation);
+            String annotationName = annotation.getName();
+            if (annotationName.equals(EnumMappers.class.getCanonicalName())) {
+                processEnumMappersAnnotation(annotatedElements);
+            } else if (annotationName.equals(EnumMapper.class.getCanonicalName())) {
+                processEnumMapperAnnotation(annotatedElements);
+            } else {
+                throw new RuntimeException("Unexpected annotation class found: '" + annotationName + "'");
 
-            // the EnumMappers annotation may be present on multiple classes
-            for (Element element : elementsByAnnotation.get(annotation)) {
-                try {
-                    new MapAllEnumsHandler(processingEnvironment, element).work();
-                } catch (Exception e) {
-                    processingEnvironment.getMessager().printMessage(Diagnostic.Kind.ERROR
-                            , "Annotation processing error: " + e.getClass().getSimpleName() + "-" + e.getMessage()
-                            , element);
-                }
             }
-
         } catch (Exception e) {
             processingEnvironment.getMessager().printMessage(Diagnostic.Kind.ERROR,
                     "Annotation processing error: " + e.getClass().getSimpleName() + "-" + e.getMessage());
         }
 
         return Collections.emptySet();
+    }
+
+    private void processEnumMapperAnnotation(Set<Element> annotatedElements) {
+        // the EnumMapper annotation may be present on multiple enums in the project
+        for (Element element : annotatedElements) {
+            try {
+                if (!ElementKind.ENUM.equals(element.getKind())) {
+                    throw new Exception(EnumMapper.class + " annotation must only be used on Enums");
+                }
+
+                TypeMirror enumsClassTypeMirror = element.asType();
+                TypeElement enumsClassTypeElement = MoreTypes.asTypeElement(enumsClassTypeMirror);
+                // now process each (Enum-)class
+                // e.g. enumsClassTypeElement.getQualifiedName() "com.test.Dummy.BoolEnum.class"
+                new MapEnumElement(processingEnvironment, element, enumsClassTypeElement).work();
+
+            } catch (Exception e) {
+                processingEnvironment.getMessager().printMessage(Diagnostic.Kind.ERROR
+                        , "Annotation processing error: " + e.getClass().getSimpleName() + "-" + e.getMessage()
+                        , element);
+            }
+        }
+    }
+
+    private void processEnumMappersAnnotation(Set<Element> annotatedElements) {
+        // the EnumMappers annotation may be present on multiple elements (classes or packages)
+        for (Element element : annotatedElements) {
+            try {
+                new MapAllEnumsHandler(processingEnvironment, element).work();
+            } catch (Exception e) {
+                processingEnvironment.getMessager().printMessage(Diagnostic.Kind.ERROR
+                        , "Annotation processing error: " + e.getClass().getSimpleName() + "-" + e.getMessage()
+                        , element);
+            }
+        }
     }
 }

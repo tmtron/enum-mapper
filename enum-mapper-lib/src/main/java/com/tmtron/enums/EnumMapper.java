@@ -21,32 +21,35 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * <p>This annotation can be used on any type or package. It will generate a full-enum-mapper {@link EnumMapperFull}
- * for each of the specified enum-classes.
- * </p>
- * <p>
- * You need to use this annotation only when you cannot apply the {@link EnumMapper} annotation (note the singular form)
- * directly to the Enum (e.g. when the Enum is defined in a 3rd party library).
+ * <p>This annotation can be used on an Enum. It will generate a full-enum-mapper {@link EnumMapperFull}
+ * which will make sure that all enum values are mapped. If you forget to map an enum, you get a compile error.
  * </p>
  * Example usage of the annotation:
  * <pre><code>
- * {@literal @}EnumMappers({Seasons.class, ColorEnum.class})
- *  public class AppUtil {}
+ * {@literal @}EnumMapper public enum Seasons {
+ *     SPRING, SUMMER, FALL, WINTER
+ *  }
  * </code></pre>
- * When you only have one class to map you do not need the curly braces:
+ * Example usage of the generated full-enum-mapper:
  * <pre><code>
- * {@literal @}EnumMappers(Seasons.class)
- *  public class AppUtil {}
- * </code></pre>
- * For an example how to use the generated full-enum-mapper see {@link EnumMapper}
+ * EnumMapperFull&lt;Seasons, String&gt; germanSeasons = Seasons_MapperFull
+ *     .setSPRING("Fruehling")
+ *     .setSUMMER("Sommer")
+ *     .setFALL("Herbst")
+ *     .setWINTER("Winter");
  *
- * @see EnumMapper
+ * String germanSummer = germanSeasons.getValue(Seasons.SUMMER); // returns "Sommer"
+ * </code></pre>
+ * <p>
+ * <p>
+ * When you cannot apply the {@link EnumMapper} annotation
+ * directly to the Enum (e.g. when the Enum is defined in a 3rd party library), you can use the
+ * {@link EnumMappers} annotation instead (note the plural form)
+ * </p>
+ *
+ * @see EnumMappers
  */
-@Target({ElementType.PACKAGE, ElementType.TYPE})
+@Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface EnumMappers {
-    /**
-     * The enum-class/es for which you want to generate a full-enum-mapper {@link EnumMapperFull}
-     */
-    Class<? extends Enum<?>>[] value();
+public @interface EnumMapper {
 }

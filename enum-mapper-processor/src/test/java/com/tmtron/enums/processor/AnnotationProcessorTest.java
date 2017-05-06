@@ -51,7 +51,7 @@ class AnnotationProcessorTest {
     /**
      * Will add "-Xlint:-processing" to the compile options, so that we don't get the warnings:
      * "No processor claimed any of these annotations..."
-     * see {@link TestSingleEnum#testWarningMessage()}
+     * see {@link TestMappers4SingleEnum#testWarningMessage()}
      */
     CompileTester assertAboutEnumsProcessing(JavaFileObject source) {
         return Truth.assertAbout(JavaSourceSubjectFactory.javaSource())

@@ -13,19 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.tmtron.enums.processor;
+package com.test;
 
-import org.junit.Test;
+// comment"
 
-public class Test2Enums extends AnnotationProcessorTest {
-    @Test
-    public void test() throws Exception {
-        assertAboutEnumsProcessing(getJfoResource("TwoEnums_Source.java"))
-                .compilesWithoutWarnings()
-                .and()
-                .generatesSources(
-                        getJfoResource("BoolEnum_MapperFull.java"),
-                        getJfoResource("ColorEnum_MapperFull.java"));
-    }
+import com.tmtron.enums.EnumMapper;
 
+@EnumMapper
+public enum Seasons {
+    SPRING, SUMMER, FALL, WINTER
 }
