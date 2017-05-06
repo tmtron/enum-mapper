@@ -2,7 +2,7 @@ language: java
 
 # see https://medium.com/@nicole_a_tesla/how-i-made-travis-ci-gradle-work-5c7a540ef639
 jdk:
-  - oraclejdk8          // tells Travis to use Java 8
+  - oraclejdk8          # tells Travis to use Java 8
 
 # see https://docs.travis-ci.com/user/languages/java/
 before_cache:
