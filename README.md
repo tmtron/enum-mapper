@@ -1,6 +1,6 @@
 
 [![Build Status](https://travis-ci.org/tmtron/enum-mapper.svg?label=travis)](https://travis-ci.org/tmtron/enum-mapper/builds)
-[![license](https://img.shields.io/github/license/tmtron/enum-mapper-example.svg?maxAge=2592000)
+[![license](https://img.shields.io/github/license/tmtron/enum-mapper.svg?maxAge=2592000)](https://raw.githubusercontent.com/tmtron/enum-mapper/master/LICENSE)
 
 # enum-mapper
 The main use is an annotation processor that builds an enum mapper which causes a compile-time error when you forget to map an enum.
