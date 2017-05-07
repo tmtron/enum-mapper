@@ -5,7 +5,7 @@
 # enum-mapper
 The main use is an annotation processor that builds an enum mapper which causes a compile-time error when you forget to map an enum.
 
-## Simple Example
+## Quick Introduction
 Just annotate your enum with the `@EnumMapper` annotation:
 ```java
 @EnumMapper
@@ -26,8 +26,28 @@ String germanSummer = germanSeasons.getValue(Seasons.SUMMER); // returns "Sommer
 ```
 Should you forget to map any enum-constant or change the enumeration (e.g. add or remove an enum-constant), you will get a compile error.
 
-## Build configuration
+Detailed usage examples are also available on the [github enum-mapper-example project](
+https://github.com/tmtron/enum-mapper-example)
+
+## Build Configuration
 TODO: add info when the project is published
+
+## Full Enum Mapper
+
+### Alternatives
+
+### Pros and Cons
+
+## Partial Enum Mapper
+The project also includes a partial enum-mapper class which you may want to use instead of a switch statement.  
+The partial enum mapper does not need the annotation processor.
+
+
+
+### Pros and Cons
+
+
+
 
 ## License
 This plugin is under the [Apache 2.0 license](http://www.apache.org/licenses/LICENSE-2.0.html). Copyright 2017, Martin Trummer

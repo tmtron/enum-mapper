@@ -55,18 +55,18 @@ public class MapAllEnumsProcessingStep implements BasicAnnotationProcessor.Proce
             // the annotations() method tells the framework which annotations to accept
             if (elementsByAnnotation.keys().size() > 2) throw new RuntimeException("Too many annotations");
 
-            Class<? extends Annotation> annotation = elementsByAnnotation.keys().iterator().next();
-            // the elements which are annotated with the annotation
-            // e.g. the EnumMappers annotation may be present on multiple classes of packages
-            Set<Element> annotatedElements = elementsByAnnotation.get(annotation);
-            String annotationName = annotation.getName();
-            if (annotationName.equals(EnumMappers.class.getCanonicalName())) {
-                processEnumMappersAnnotation(annotatedElements);
-            } else if (annotationName.equals(EnumMapper.class.getCanonicalName())) {
-                processEnumMapperAnnotation(annotatedElements);
-            } else {
-                throw new RuntimeException("Unexpected annotation class found: '" + annotationName + "'");
-
+            for (Class<? extends Annotation> annotation : elementsByAnnotation.keys()) {
+                // the elements which are annotated with the annotation
+                // e.g. the EnumMappers annotation may be present on multiple classes of packages
+                Set<Element> annotatedElements = elementsByAnnotation.get(annotation);
+                String annotationName = annotation.getName();
+                if (annotationName.equals(EnumMappers.class.getCanonicalName())) {
+                    processEnumMappersAnnotation(annotatedElements);
+                } else if (annotationName.equals(EnumMapper.class.getCanonicalName())) {
+                    processEnumMapperAnnotation(annotatedElements);
+                } else {
+                    throw new RuntimeException("Unexpected annotation class found: '" + annotationName + "'");
+                }
             }
         } catch (Exception e) {
             processingEnvironment.getMessager().printMessage(Diagnostic.Kind.ERROR,
