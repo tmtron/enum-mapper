@@ -1,6 +1,6 @@
 
 [![Build Status](https://travis-ci.org/tmtron/enum-mapper.svg?label=travis)](https://travis-ci.org/tmtron/enum-mapper/builds)
-[![license](https://img.shields.io/github/license/tmtron/enum-mapper.svg?maxAge=2592000)](https://raw.githubusercontent.com/tmtron/enum-mapper/master/LICENSE)
+[![license](https://img.shields.io/github/license/tmtron/enum-mapper.svg?maxAge=2592000)](https://raw.githubusercontent.com/tmtron/enum-mapper/master/LICENSE)  
 
 # enum-mapper
 The main use: make sure that you always handle all available constants of an enum. An annotation processor will
@@ -11,12 +11,19 @@ You can also use a [Partial Mapper](#partial-enum-mapper) and it supports [Rever
 
 The project is available in [Maven Central](https://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.tmtron.enums%22) and 
  [JCenter-Bintray](https://bintray.com/tmtron/maven/com.tmtron.enum-mapper) repositories.
-
+  
 ```gradle
     def VERSION_ENUM_MAPPER = '1.0.1' // check for newer versions here: https://goo.gl/LSP1fv
     compile  "com.tmtron.enums:enum-mapper-lib:${VERSION_ENUM_MAPPER}"
     apt "com.tmtron.enums:enum-mapper-processor:${VERSION_ENUM_MAPPER}"
 ```
+### enum-mapper-lib  [![Maven Central lib](https://img.shields.io/maven-central/v/com.tmtron.enums/enum-mapper-lib.svg?maxAge=2592000)](https://maven-badges.herokuapp.com/maven-central/com.tmtron.enums/enum-mapper-lib)  
+Contains java code and annoations.  
+This is always needed at compile-time.
+ 
+### enum-mapper-processor [![Maven Central processor](https://img.shields.io/maven-central/v/com.tmtron.enums/enum-mapper-processor.svg?maxAge=2592000)](https://maven-badges.herokuapp.com/maven-central/com.tmtron.enums/enum-mapper-processor)  
+Contains the annotation-processor.  
+This is needed by the annotation-processing build-step (`apt`) and it is only required for the [Full Enum Mapper](#full-enum-mapper).  
 
 ## Full Enum Mapper
 
