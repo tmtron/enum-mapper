@@ -4,7 +4,8 @@
 
 # enum-mapper
 The main use: make sure that you always handle all available constants of an enum. An annotation processor will
- make sure that you get a compile-time error otherwise.
+ make sure that you get a compile-time error otherwise: see [Full Enum Mapper](#full-enum-mapper).  
+You can also use a [Partial Mapper](#partial-enum-mapper) and it supports [Reverse Mapping](#reverse-mapping).
 
 ## Build Configuration
 
@@ -72,7 +73,7 @@ public class AppUtil {
 ``` 
 Then the annotation processor will create a full enum-mapper for `ColorEnum` and for `BoolEnum`.
 
-Hint: when you want a map a single enum, you don't need the curly braces (for the array-syntax)  
+Hint: when you want to map a single enum, you don't need the curly braces (for the array-syntax)  
 ```java
 @EnumMappers(ColorEnum.class)
 public class AppUtil {
@@ -107,6 +108,7 @@ ExtremeSeasons.getEnumOrNull("Sommer");                 // returns the enum-cons
 ExtremeSeasons.getEnumOrDefault("Fruehling", FALL));    // returns the enum-constant FALL
 ExtremeSeasons.getEnumOrRaise("Fruehling");             // throws an IllegalArgumentException 
 ``` 
+When you do a reverse mapping the mapped values should of course be unique.
 
 ### Alternatives
 This section mentions some alternative approaches that you can use instead of this annotation processor.
@@ -145,6 +147,7 @@ public enum AlternativeBool {
 #### IDE checks
 Some IDEs allow you to activate a check that will warn you when you forget an enum constant in a switch statement:
 * [Eclipse: Ensuring completeness of switch statements](http://help.eclipse.org/kepler/index.jsp?topic=%2Forg.eclipse.jdt.doc.user%2Ftasks%2Ftask-ensuring_switch_completeness.htm)
+
 **Advantages** 
 * this approach does not need an annotation processor
 * direct and immediate feedback
