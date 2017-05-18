@@ -22,7 +22,7 @@ import javax.annotation.Nullable;
 
 /**
  * {@link EnumMapperPartial} allows to associate enum-constants with values.
- * <p> In comparison to {@link EnumMapperFull} it will not check if all enumerations constans are mapped.
+ * <p> In comparison to {@link EnumMapperFull} it will not check if all enumerations constants are mapped.
  * </p>
  * <p>
  * Note: this class does not allow for {@code null} values. You may use {@link java.util.Optional} as type.
