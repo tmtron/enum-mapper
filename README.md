@@ -145,11 +145,12 @@ public enum AlternativeBool {
     public abstract String getGermanName();
 }
 ```
-**Advantages** 
+
+*Advantages* 
 * this approach does not need an annotation processor
 * you also get a compile-time error should you forget to implement a method for a new enum
 
-**Disadvantages**
+*Disadvantages*
 * it is quite verbose
 * you can only use this for enums that you control
 
@@ -157,21 +158,22 @@ public enum AlternativeBool {
 Some IDEs allow you to activate a check that will warn you when you forget an enum constant in a switch statement:
 * [Eclipse: Ensuring completeness of switch statements](http://help.eclipse.org/kepler/index.jsp?topic=%2Forg.eclipse.jdt.doc.user%2Ftasks%2Ftask-ensuring_switch_completeness.htm)
 
-**Advantages** 
+*Advantages* 
 * this approach does not need an annotation processor
 * direct and immediate feedback
 
-**Disadvantages**
+*Disadvantages*
 * you could forget to active the switch 
 * someone members of your team may use other IDEs which don't support this feature
 
 #### Other tools 
 For example [FindBugs](http://findbugs.sourceforge.net/) has a check *Switch statement found where default case is missing* 
 [SF_SWITCH_NO_DEFAULT](http://findbugs.sourceforge.net/bugDescriptions.html#SF_SWITCH_NO_DEFAULT)
-**Advantages** 
+
+*Advantages*
 * other tools may offer way more functionality
 
-**Disadvantages**
+*Disadvantages*
 * those are other tools that you must learn to use and maintain 
 
 
