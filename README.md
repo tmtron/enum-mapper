@@ -120,10 +120,11 @@ ExtremeSeasons.getEnumOrRaise("Fruehling");             // throws an IllegalArgu
 When you do a reverse mapping the mapped values should of course be unique.
 
 ### Alternatives
-This section mentions some alternative approaches that you can use instead of this annotation processor.
+This section mentions some alternative approaches that you can use instead of this annotation processor.  
+See also: [Stackoverflow: How to ensure completeness in an enum switch at compile time?](https://stackoverflow.com/questions/16797529/how-to-ensure-completeness-in-an-enum-switch-at-compile-time)
 
 #### Abstract Enum Methods 
-As mentioned in this [Stackoverflow answer to: Force exhaustive switch](http://stackoverflow.com/a/27184080/6287240) 
+As mentioned in this [Stackoverflow answer](https://stackoverflow.com/a/16798500/6287240) 
 you can have abstract methods on your enum definition. 
 ```java
 public enum AlternativeBool {
