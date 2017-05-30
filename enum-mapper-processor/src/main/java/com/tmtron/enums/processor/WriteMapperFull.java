@@ -26,6 +26,7 @@ import com.squareup.javapoet.TypeVariableName;
 import com.tmtron.enums.EnumMapperFull;
 
 import java.time.format.DateTimeFormatter;
+import java.util.Collection;
 import java.util.List;
 
 import javax.annotation.Generated;
@@ -34,14 +35,14 @@ import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
 
 class WriteMapperFull {
-    private final Element annotatedElement;
+    private final Collection<Element> annotatedElements;
     private final TypeElement enumsClassTypeElement;
     private final List<CodeGenEnumConst> enumConstants;
     private final TypeVariableName typeVariableName4Value;
 
-    WriteMapperFull(Element annotatedElement, TypeElement enumsClassTypeElement, List<CodeGenEnumConst>
-            enumConstants, TypeVariableName typeVariableName4Value) {
-        this.annotatedElement = annotatedElement;
+    WriteMapperFull(Collection<Element> annotatedElements, TypeElement enumsClassTypeElement
+            , List<CodeGenEnumConst> enumConstants, TypeVariableName typeVariableName4Value) {
+        this.annotatedElements = annotatedElements;
         this.enumsClassTypeElement = enumsClassTypeElement;
         this.enumConstants = enumConstants;
         this.typeVariableName4Value = typeVariableName4Value;
@@ -53,7 +54,7 @@ class WriteMapperFull {
      *  {@literal @}Generated(
      *    value = "com.tmtron.enums.processor.EnumsAnnotationProcessor",
      *    date = "1976-12-14T15:16:17.234+02:00",
-     *    comments = "origin=com.test.TwoEnums_Source"
+     *    comments = "origin=[com.test.TwoEnums_SourceA,com.test.TwoEnums_SourceB]"
      *    )
      * </code></pre>
      *
@@ -65,7 +66,23 @@ class WriteMapperFull {
                 .addMember("value", "$S", annotationProcessorClass.getCanonicalName())
                 .addMember("date", "$S", dateString);
 
-        String commentsString = "origin=" + MoreElements.asType(annotatedElement).getQualifiedName().toString();
+        StringBuilder sbOrigin = new StringBuilder();
+        annotatedElements.forEach(annotatedElement -> {
+            if (sbOrigin.length() > 0) {
+                sbOrigin.append(",");
+            }
+            sbOrigin.append(MoreElements.asType(annotatedElement).getQualifiedName().toString());
+        });
+
+        String commentsString = "origin=";
+        if (annotatedElements.size() > 1) {
+            commentsString += "[";
+        }
+        commentsString += sbOrigin.toString();
+        if (annotatedElements.size() > 1) {
+            commentsString += "]";
+        }
+
         annotationSpecBuilder.addMember("comments", "$S", commentsString);
 
         return annotationSpecBuilder.build();

@@ -21,6 +21,7 @@ import com.tmtron.enums.EnumMappers;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.annotation.processing.ProcessingEnvironment;
@@ -34,7 +35,7 @@ import javax.lang.model.element.TypeElement;
 class MapEnumElement {
 
     private final ProcessingEnvironment processingEnvironment;
-    private final Element annotatedElement;
+    private final Collection<Element> annotatedElements;
     private final TypeElement enumsClassTypeElement;
     private final List<CodeGenEnumConst> enumConstants = new ArrayList<>();
     private final TypeVariableName typeVariableName4Value;
@@ -43,13 +44,13 @@ class MapEnumElement {
      * Will process a single Enum class of the {@link EnumMappers} annotation.
      *
      * @param processingEnvironment the processing environment
-     * @param annotatedElement      the element (e.g. class) which has the {@link EnumMappers} annotation
+     * @param annotatedElements     the element/s (e.g. classe) which has/have the {@link EnumMappers} annotation
      * @param enumsClassTypeElement a single Enum class from the "values" array of the {@link EnumMappers} annotation
      */
-    MapEnumElement(ProcessingEnvironment processingEnvironment, Element annotatedElement,
+    MapEnumElement(ProcessingEnvironment processingEnvironment, Collection<Element> annotatedElements,
                    TypeElement enumsClassTypeElement) {
         this.processingEnvironment = processingEnvironment;
-        this.annotatedElement = annotatedElement;
+        this.annotatedElements = annotatedElements;
         this.enumsClassTypeElement = enumsClassTypeElement;
         typeVariableName4Value = TypeVariableName.get("V");
     }
@@ -73,7 +74,7 @@ class MapEnumElement {
         }
         if (enumConstants.size() < 2) throw new RuntimeException("The Enum must have at least 2 constants!");
 
-        WriteMapperFull writeMapperFull = new WriteMapperFull(annotatedElement, enumsClassTypeElement
+        WriteMapperFull writeMapperFull = new WriteMapperFull(annotatedElements, enumsClassTypeElement
                 , enumConstants, typeVariableName4Value);
         try {
             JavaFile.builder(getPackageName(), writeMapperFull.work())

@@ -16,26 +16,35 @@
 package com.test;
 
 /*
- * Test if we can put the @EnumMappers annotation on 2 different classes
- * did not work in V1.0.1
- * see issue #2: "@EnumMappers can only be used once in the project"
- *  https://github.com/tmtron/enum-mapper/issues/2
+ * Test if we can put the @EnumMappers annotation handles duplicate
+ * enums gracefully
+ * Did not work in V1.0.1
+ * see issue #3 "duplicate enums in @EnumMappers should be ignored"
+ * https://github.com/tmtron/enum-mapper/issues/3
  */
 
 import com.tmtron.enums.EnumMappers;
 
-public class TwoClasses_Source {
+public class DuplicateEnums_Source {
     enum BoolEnum {OFF, ON}
 
     enum ColorEnum {RED, BLUE}
 
-    @EnumMappers({TwoClasses_Source.BoolEnum.class})
+    @EnumMappers({DuplicateEnums_Source.BoolEnum.class})
     public static class AnnotatedClassA {
 
     }
 
-    @EnumMappers({TwoClasses_Source.ColorEnum.class})
+    @EnumMappers({DuplicateEnums_Source.ColorEnum.class})
     public static class AnnotatedClassB {
+
+    }
+
+    /**
+     * NOTE: here we use BoolEnum again
+     */
+    @EnumMappers({DuplicateEnums_Source.BoolEnum.class})
+    public static class AnnotatedClassC {
 
     }
 

@@ -92,7 +92,8 @@ public class MapAllEnumsProcessingStep implements BasicAnnotationProcessor.Proce
                 TypeElement enumsClassTypeElement = MoreTypes.asTypeElement(enumsClassTypeMirror);
                 // now process each (Enum-)class
                 // e.g. enumsClassTypeElement.getQualifiedName() "com.test.Dummy.BoolEnum.class"
-                new MapEnumElement(processingEnvironment, element, enumsClassTypeElement).work();
+                new MapEnumElement(processingEnvironment, Collections.singletonList(element), enumsClassTypeElement)
+                        .work();
 
             } catch (Exception e) {
                 processingEnvironment.getMessager().printMessage(Diagnostic.Kind.ERROR
@@ -103,15 +104,11 @@ public class MapAllEnumsProcessingStep implements BasicAnnotationProcessor.Proce
     }
 
     private void processEnumMappersAnnotation(Set<Element> annotatedElements) {
-        // the EnumMappers annotation may be present on multiple elements (classes or packages)
-        for (Element element : annotatedElements) {
-            try {
-                new MapAllEnumsHandler(processingEnvironment, element).work();
-            } catch (Exception e) {
-                processingEnvironment.getMessager().printMessage(Diagnostic.Kind.ERROR
-                        , "Annotation processing error: " + e.getClass().getSimpleName() + "-" + e.getMessage()
-                        , element);
-            }
+        try {
+            new MapAllEnumsHandler(processingEnvironment, annotatedElements).work();
+        } catch (Exception e) {
+            processingEnvironment.getMessager().printMessage(Diagnostic.Kind.ERROR
+                    , "Annotation processing error: " + e.getClass().getSimpleName() + "-" + e.getMessage());
         }
     }
 }
