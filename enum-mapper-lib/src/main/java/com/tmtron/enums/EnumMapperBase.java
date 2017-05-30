@@ -29,7 +29,9 @@ public class EnumMapperBase<K extends Enum<K>, V> {
     }
 
     /**
-     * Returns the enum-key which is mapped to the given value or {@code defEnum} if this map contains no mapping for
+     * @param value   the mapped value
+     * @param defEnum the default Enum when there is no mapping
+     * @return the enum-key which is mapped to the given value or {@code defEnum} if this map contains no mapping for
      * the value.
      */
     public @Nonnull
@@ -42,10 +44,10 @@ public class EnumMapperBase<K extends Enum<K>, V> {
     }
 
     /**
-     * Returns the enum-key which is mapped to the given value or throws an exception when this map contains no mapping
+     * @param value the mapped value
+     * @return the enum-key which is mapped to the given value or throws an exception when this map contains no mapping
      * for the value.
-     *
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException when there is no mapping for the value
      */
     public @Nonnull
     K getEnumOrRaise(@Nonnull V value) {
@@ -56,8 +58,9 @@ public class EnumMapperBase<K extends Enum<K>, V> {
     }
 
     /**
-     * Returns the enum-key which is mapped to the given value or {@code null} when this map contains no mapping for the
-     * value.
+     * @param value the mapped value
+     * @return the enum-key which is mapped to the given value or {@code null} when this map contains no
+     * mapping for the value.
      */
     @Nullable
     public K getEnumOrNull(@Nonnull V value) {
@@ -86,7 +89,8 @@ public class EnumMapperBase<K extends Enum<K>, V> {
     }
 
     /**
-     * Returns the value to which the specified key is mapped or {@code null}
+     * @param enumValue the enum value
+     * @return the value to which the specified key is mapped or {@code null}
      */
     protected @Nullable
     V getValueOrNullInternal(@Nonnull K enumValue) {

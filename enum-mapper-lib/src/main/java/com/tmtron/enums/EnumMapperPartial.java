@@ -180,6 +180,7 @@ public class EnumMapperPartial<K extends Enum<K>, V> extends EnumMapperBase<K, V
      * @param enumClass the enum-class (of the K type-parameter)
      * @param <K>       key type (Enum)
      * @param <V>       value type
+     * @return a builder for the given enumClass.
      */
     public static @Nonnull
     <K extends Enum<K>, V> Builder<K, V> builder(@Nonnull Class<K> enumClass) {
@@ -196,6 +197,7 @@ public class EnumMapperPartial<K extends Enum<K>, V> extends EnumMapperBase<K, V
      * @param val1 first value
      * @param <K>  key type (Enum)
      * @param <V>  value type
+     * @return a builder including the first key-value pair
      */
     public static @Nonnull
     <K extends Enum<K>, V> Builder<K, V> builder(@Nonnull K key1, @Nonnull V val1) {
@@ -203,7 +205,8 @@ public class EnumMapperPartial<K extends Enum<K>, V> extends EnumMapperBase<K, V
     }
 
     /**
-     * Returns the value to which the specified key is mapped, or {@code null} if this map contains no mapping for the
+     * @param enumValue the enum value
+     * @return the value to which the specified key is mapped, or {@code null} if this map contains no mapping for the
      * key.
      */
     public @Nullable
@@ -212,7 +215,9 @@ public class EnumMapperPartial<K extends Enum<K>, V> extends EnumMapperBase<K, V
     }
 
     /**
-     * Returns the value to which the specified key is mapped or the default
+     * @param enumValue the enum value
+     * @param defValue  the default value when there is no mapping
+     * @return the value to which the specified key is mapped or the default
      */
     public @Nonnull
     V getValueOrDefault(@Nonnull K enumValue, @Nonnull V defValue) {
@@ -240,8 +245,7 @@ public class EnumMapperPartial<K extends Enum<K>, V> extends EnumMapperBase<K, V
         }
 
         /**
-         * Returns an enum mapper.
-         *
+         * @return an enum mapper.
          * @throws IllegalArgumentException when you did not call put for all possible Enum constants
          */
         public EnumMapperPartial<K, V> build() {

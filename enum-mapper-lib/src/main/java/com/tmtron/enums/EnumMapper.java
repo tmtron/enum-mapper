@@ -41,7 +41,6 @@ import java.lang.annotation.Target;
  * String germanSummer = germanSeasons.getValue(Seasons.SUMMER); // returns "Sommer"
  * </code></pre>
  * <p>
- * <p>
  * When you cannot apply the {@link EnumMapper} annotation
  * directly to the Enum (e.g. when the Enum is defined in a 3rd party library), you can use the
  * {@link EnumMappers} annotation instead (note the plural form)

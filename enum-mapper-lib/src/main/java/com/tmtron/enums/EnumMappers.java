@@ -46,7 +46,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface EnumMappers {
     /**
-     * The enum-class/es for which you want to generate a full-enum-mapper {@link EnumMapperFull}
+     * @return the enum-class/es for which you want to generate a full-enum-mapper {@link EnumMapperFull}
      */
     Class<? extends Enum<?>>[] value();
 }
