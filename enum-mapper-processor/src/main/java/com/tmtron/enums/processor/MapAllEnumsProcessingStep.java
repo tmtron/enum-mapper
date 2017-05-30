@@ -23,7 +23,9 @@ import com.tmtron.enums.EnumMapper;
 import com.tmtron.enums.EnumMappers;
 
 import java.lang.annotation.Annotation;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.Map;
 import java.util.Set;
 
 import javax.annotation.processing.ProcessingEnvironment;
@@ -52,10 +54,12 @@ public class MapAllEnumsProcessingStep implements BasicAnnotationProcessor.Proce
     @Override
     public Set<Element> process(SetMultimap<Class<? extends Annotation>, Element> elementsByAnnotation) {
         try {
+            Map<Class<? extends Annotation>, Collection<Element>> annotationsMap =
+                    elementsByAnnotation.asMap();
             // the annotations() method tells the framework which annotations to accept
-            if (elementsByAnnotation.keys().size() > 2) throw new RuntimeException("Too many annotations");
+            if (annotationsMap.keySet().size() > 2) throw new RuntimeException("Too many annotations");
 
-            for (Class<? extends Annotation> annotation : elementsByAnnotation.keys()) {
+            for (Class<? extends Annotation> annotation : annotationsMap.keySet()) {
                 // the elements which are annotated with the annotation
                 // e.g. the EnumMappers annotation may be present on multiple classes of packages
                 Set<Element> annotatedElements = elementsByAnnotation.get(annotation);
