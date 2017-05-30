@@ -17,7 +17,7 @@ package com.tmtron.enums.processor;
 
 import org.junit.Test;
 
-public class TestMappersOn2classes extends AnnotationProcessorTest {
+public class TestMappersOn2Classes extends AnnotationProcessorTest {
     @Test
     public void test() throws Exception {
         assertAboutEnumsProcessing(getJfoResource("TwoClasses_Source.java"))
