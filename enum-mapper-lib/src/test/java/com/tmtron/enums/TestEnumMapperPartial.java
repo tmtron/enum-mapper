@@ -105,4 +105,28 @@ public class TestEnumMapperPartial {
         assertEquals("xx", mapper.getValueOrDefault(I9, "xx"));
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void testGetEnumOrRaise_throws_for_unknown_value() throws Exception {
+        EnumMapperPartial<Nine, String> mapper = EnumMapperPartial.builder(I1, "1")
+                .put(I2, "2")
+                .build();
+        mapper.getEnumOrRaise("7");
+    }
+
+    @Test
+    public void testGetValueOrRaise_returns_value() throws Exception {
+        EnumMapperPartial<Nine, String> mapper = EnumMapperPartial.builder(I1, "1")
+                .put(I2, "2")
+                .build();
+        assertEquals("1", mapper.getValueOrRaise(I1));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testGetValueOrRaise_throws_for_unknown_value() throws Exception {
+        EnumMapperPartial<Nine, String> mapper = EnumMapperPartial.builder(I1, "1")
+                .put(I2, "2")
+                .build();
+        mapper.getValueOrRaise(I9);
+    }
+
 }

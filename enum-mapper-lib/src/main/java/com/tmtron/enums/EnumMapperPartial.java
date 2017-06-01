@@ -215,6 +215,19 @@ public class EnumMapperPartial<K extends Enum<K>, V> extends EnumMapperBase<K, V
     }
 
     /**
+     * @param enumValue enum-key
+     * @return the value to which the specified key is mapped
+     * @throws IllegalArgumentException when there is no mapping for the enum
+     */
+    public @Nonnull
+    V getValueOrRaise(@Nonnull K enumValue) {
+        checkNonnull(enumValue, "enumValue must not be null");
+        V result = getValueOrNullInternal(enumValue);
+        if (result != null) return result;
+        throw new IllegalArgumentException("no mapping found for enum: " + enumValue.toString());
+    }
+
+    /**
      * @param enumValue the enum value
      * @param defValue  the default value when there is no mapping
      * @return the value to which the specified key is mapped or the default
