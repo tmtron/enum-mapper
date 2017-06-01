@@ -105,7 +105,8 @@ Now you can call the `getValueOrNull` or `getValueOrDefault` methods like this:
 ExtremeSeasons.getValueOrNull(SUMMER);                      // returns "Sommer"
 ExtremeSeasons.getValueOrNull(WINTER);                      // returns "Winter"
 ExtremeSeasons.getValueOrNull(SPRING));                     // returns null
-ExtremeSeasons.getValueOrDefault(SPRING, "not extreme");    // returns "not extreme" 
+ExtremeSeasons.getValueOrDefault(SPRING, "not extreme");    // returns "not extreme"
+ExtremeSeasons.getValueOrRaise(SPRING);                     // throws an IllegalArgumentException
 ```
 
 ## Reverse mapping
