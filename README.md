@@ -13,7 +13,7 @@ The project is available in [Maven Central](https://search.maven.org/#search%7Cg
  [JCenter-Bintray](https://bintray.com/tmtron/maven/com.tmtron.enum-mapper) repositories.
   
 ```gradle
-    def VERSION_ENUM_MAPPER = '1.0.1' // check for newer versions here: https://goo.gl/LSP1fv
+    def VERSION_ENUM_MAPPER = '1.0.2' // check for newer versions here: https://goo.gl/LSP1fv
     compile  "com.tmtron.enums:enum-mapper-lib:${VERSION_ENUM_MAPPER}"
     apt "com.tmtron.enums:enum-mapper-processor:${VERSION_ENUM_MAPPER}"
 ```
@@ -102,10 +102,10 @@ An example of a partial mapper for your `Seasons` enum:
 ```
 Now you can call the `getValueOrNull` or `getValueOrDefault` methods like this:
 ```java
-ExtremeSeasons.getValueOrNull(SUMMER);  // returns "Sommer"
-ExtremeSeasons.getValueOrNull(WINTER);  // returns "Winter"
-ExtremeSeasons.getValueOrNull(SPRING)); // returns null
-ExtremeSeasons.getValueOrDefault(SPRING, "not extreme");    // returns "not extreme"
+ExtremeSeasons.getValueOrNull(SUMMER);                      // returns "Sommer"
+ExtremeSeasons.getValueOrNull(WINTER);                      // returns "Winter"
+ExtremeSeasons.getValueOrNull(SPRING));                     // returns null
+ExtremeSeasons.getValueOrDefault(SPRING, "not extreme");    // returns "not extreme" 
 ```
 
 ## Reverse mapping
