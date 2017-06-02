@@ -20,12 +20,12 @@ The project is available in [Maven Central](https://search.maven.org/#search%7Cg
 ### enum-mapper-lib 
 Contains java code and annoations.  
 This is always needed at compile-time.  
-[![Maven Central lib](https://img.shields.io/maven-central/v/com.tmtron.enums/enum-mapper-lib.svg?maxAge=2592000)](https://maven-badges.herokuapp.com/maven-central/com.tmtron.enums/enum-mapper-lib) [![Javadoc](https://javadoc-emblem.rhcloud.com/doc/com.tmtron.enums/enum-mapper-lib/badge.svg)](http://www.javadoc.io/doc/com.tmtron.enums/enum-mapper-lib/) 
+[![Maven Central lib](https://img.shields.io/maven-central/v/com.tmtron.enums/enum-mapper-lib.svg?maxAge=864000)](https://maven-badges.herokuapp.com/maven-central/com.tmtron.enums/enum-mapper-lib) [![Javadoc](https://javadoc-emblem.rhcloud.com/doc/com.tmtron.enums/enum-mapper-lib/badge.svg?maxAge=864000)](http://www.javadoc.io/doc/com.tmtron.enums/enum-mapper-lib/) 
  
 ### enum-mapper-processor  
 Contains the annotation-processor.  
 This is needed by the annotation-processing build-step (`apt`) and it is only required for the [Full Enum Mapper](#full-enum-mapper).  
- [![Maven Central processor](https://img.shields.io/maven-central/v/com.tmtron.enums/enum-mapper-processor.svg?maxAge=2592000)](https://maven-badges.herokuapp.com/maven-central/com.tmtron.enums/enum-mapper-processor) [![Javadoc](https://javadoc-emblem.rhcloud.com/doc/com.tmtron.enums/enum-mapper-processor/badge.svg)](http://www.javadoc.io/doc/com.tmtron.enums/enum-mapper-processor/) 
+ [![Maven Central processor](https://img.shields.io/maven-central/v/com.tmtron.enums/enum-mapper-processor.svg?maxAge=864000)](https://maven-badges.herokuapp.com/maven-central/com.tmtron.enums/enum-mapper-processor) [![Javadoc](https://javadoc-emblem.rhcloud.com/doc/com.tmtron.enums/enum-mapper-processor/badge.svg?maxAge=864000)](http://www.javadoc.io/doc/com.tmtron.enums/enum-mapper-processor/) 
 
 ## Full Enum Mapper
 
