@@ -13,7 +13,7 @@ The project is available in [Maven Central](https://search.maven.org/#search%7Cg
  [JCenter-Bintray](https://bintray.com/tmtron/maven/com.tmtron.enum-mapper) repositories.
   
 ```gradle
-    final VERSION_ENUM_MAPPER = '1.0.2' // check for newer versions here: https://goo.gl/LSP1fv
+    final VERSION_ENUM_MAPPER = '1.0.3' // check for newer versions here: https://goo.gl/LSP1fv
     compile  "com.tmtron.enums:enum-mapper-lib:${VERSION_ENUM_MAPPER}"
     apt "com.tmtron.enums:enum-mapper-processor:${VERSION_ENUM_MAPPER}"
 ```
@@ -107,6 +107,8 @@ ExtremeSeasons.getValueOrNull(WINTER);                      // returns "Winter"
 ExtremeSeasons.getValueOrNull(SPRING));                     // returns null
 ExtremeSeasons.getValueOrDefault(SPRING, "not extreme");    // returns "not extreme"
 ExtremeSeasons.getValueOrRaise(SPRING);                     // throws an IllegalArgumentException
+ExtremeSeasons.isEnumMapped(SUMMER);                        // returns true
+ExtremeSeasons.isEnumMapped(SPRING);                        // returns false
 ```
 
 ## Reverse mapping
@@ -117,6 +119,8 @@ For example, we can use the `ExtremeSeasons` mapper to get the enum-constant for
 ExtremeSeasons.getEnumOrNull("Sommer");                 // returns the enum-constant SUMMER
 ExtremeSeasons.getEnumOrDefault("Fruehling", FALL));    // returns the enum-constant FALL
 ExtremeSeasons.getEnumOrRaise("Fruehling");             // throws an IllegalArgumentException 
+ExtremeSeasons.isValueMapped("Sommer");                 // returns true
+ExtremeSeasons.isValueMapped("Fruehling");              // returns false
 ``` 
 When you do a reverse mapping the mapped values should of course be unique.
 
