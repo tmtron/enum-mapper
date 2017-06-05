@@ -27,7 +27,9 @@ import static com.tmtron.enums.TestEnumMapperFull.Nine.I7;
 import static com.tmtron.enums.TestEnumMapperFull.Nine.I8;
 import static com.tmtron.enums.TestEnumMapperFull.Nine.I9;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 public class TestEnumMapperFull {
 
@@ -38,7 +40,7 @@ public class TestEnumMapperFull {
 
     @Test(expected = IllegalArgumentException.class)
     public void testMapperOfThrowsOnMissingValues2() {
-        EnumMapperFull.of(I1, 1, Nine.I2, 2);
+        EnumMapperFull<Nine, Integer> xx = EnumMapperFull.of(I1, 1, Nine.I2, 2);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -92,6 +94,39 @@ public class TestEnumMapperFull {
     @Test(expected = IllegalArgumentException.class)
     public void testGetOrRaise() throws Exception {
         fullMapper.getEnumOrRaise(77);
+    }
+
+    @Test
+    public void testIsEnumMapped() {
+        assertTrue(fullMapper.isEnumMapped(I1));
+        assertTrue(fullMapper.isEnumMapped(I2));
+        assertTrue(fullMapper.isEnumMapped(I3));
+        assertTrue(fullMapper.isEnumMapped(I4));
+        assertTrue(fullMapper.isEnumMapped(I5));
+        assertTrue(fullMapper.isEnumMapped(I6));
+        assertTrue(fullMapper.isEnumMapped(I7));
+        assertTrue(fullMapper.isEnumMapped(I8));
+        assertTrue(fullMapper.isEnumMapped(I9));
+    }
+
+    @Test
+    public void testIsValueMapped() {
+        assertTrue(fullMapper.isValueMapped(1));
+        assertTrue(fullMapper.isValueMapped(2));
+        assertTrue(fullMapper.isValueMapped(3));
+        assertTrue(fullMapper.isValueMapped(4));
+        assertTrue(fullMapper.isValueMapped(5));
+        assertTrue(fullMapper.isValueMapped(6));
+        assertTrue(fullMapper.isValueMapped(7));
+        assertTrue(fullMapper.isValueMapped(8));
+        assertTrue(fullMapper.isValueMapped(9));
+    }
+
+    @Test
+    public void testIsValueMapped_returns_false() {
+        assertFalse(fullMapper.isValueMapped(-1));
+        assertFalse(fullMapper.isValueMapped(0));
+        assertFalse(fullMapper.isValueMapped(10));
     }
 
 }

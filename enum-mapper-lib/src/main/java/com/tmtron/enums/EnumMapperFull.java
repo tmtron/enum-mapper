@@ -219,6 +219,16 @@ public class EnumMapperFull<K extends Enum<K>, V> extends EnumMapperBase<K, V> {
         return result;
     }
 
+    /**
+     * @param enumConst the enumeration constant
+     * @return always returns {@code true}, because {@link EnumMapperFull} guarantees that all enum-constants are mapped
+     */
+    @Override
+    public boolean isEnumMapped(@Nonnull K enumConst) {
+        assert super.isEnumMapped(enumConst);
+        return true;
+    }
+
     public static class Builder<K extends Enum<K>, V> extends BuilderBase<K, V> {
 
         private Builder(@Nonnull K key) {

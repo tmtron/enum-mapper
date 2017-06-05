@@ -68,10 +68,29 @@ public class EnumMapperBase<K extends Enum<K>, V> {
         for (K key : enumMap.keySet()) {
             V lookupValue = enumMap.get(key);
             if (value.equals(lookupValue)) {
+                assert isValueMapped(value);
                 return key;
             }
         }
         return null;
+    }
+
+    /**
+     * @param value the mapped value
+     * @return {@code true} when the given value is mapped by one or more Enum constants, {@code false} otherwise
+     */
+    public boolean isValueMapped(@Nonnull V value) {
+        checkNonnull(value, "value must not be null");
+        return enumMap.containsValue(value);
+    }
+
+    /**
+     * @param enumConst the enumeration constant
+     * @return {@code true} when the enumConst is mapped to a value, {@code false} otherwise
+     */
+    public boolean isEnumMapped(@Nonnull K enumConst) {
+        checkNonnull(enumConst, "enumConst must not be null");
+        return enumMap.containsKey(enumConst);
     }
 
     public static <T> T checkNonnull(@Nullable T obj, @Nonnull String msg) {

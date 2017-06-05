@@ -27,21 +27,32 @@ import static com.tmtron.enums.TestEnumMapperPartial.Nine.I7;
 import static com.tmtron.enums.TestEnumMapperPartial.Nine.I8;
 import static com.tmtron.enums.TestEnumMapperPartial.Nine.I9;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 public class TestEnumMapperPartial {
 
     enum Nine {I1, I2, I3, I4, I5, I6, I7, I8, I9}
+
+    final EnumMapperFull<Nine, Integer> fullMapper = EnumMapperFull.of(I1, 1, Nine.I2, 2, I3, 3
+            , I4, 4, I5, 5, I6, 6, I7, 7, I8, 8, I9, 9);
 
     private void assertMapping(EnumMapperPartial<Nine, Integer> mapper, int value, boolean expectedToBeOkay) {
         Nine enumResult = mapper.getEnumOrNull(value);
         if (expectedToBeOkay) {
             assertNotNull(enumResult);
             assertEquals(Integer.valueOf(value), mapper.getValueOrNull(enumResult));
+            assertTrue(mapper.isEnumMapped(enumResult));
+            assertTrue(mapper.isValueMapped(value));
+
         } else {
             assertNull(enumResult);
             assertEquals(I9, mapper.getEnumOrDefault(value, I9));
+            assertFalse(mapper.isValueMapped(value));
+            Nine nonMappedEnum = fullMapper.getEnumOrRaise(value);
+            assertFalse(mapper.isEnumMapped(nonMappedEnum));
         }
     }
 
@@ -54,18 +65,18 @@ public class TestEnumMapperPartial {
 
     @Test
     public void testMapperof() {
-        assertMapper(2, EnumMapperPartial.of(I1, 1, Nine.I2, 2));
-        assertMapper(3, EnumMapperPartial.of(I1, 1, Nine.I2, 2, I3, 3));
-        assertMapper(4, EnumMapperPartial.of(I1, 1, Nine.I2, 2, I3, 3, I4, 4));
-        assertMapper(5, EnumMapperPartial.of(I1, 1, Nine.I2, 2, I3, 3, I4, 4
+        assertMapper(2, EnumMapperPartial.of(I1, 1, I2, 2));
+        assertMapper(3, EnumMapperPartial.of(I1, 1, I2, 2, I3, 3));
+        assertMapper(4, EnumMapperPartial.of(I1, 1, I2, 2, I3, 3, I4, 4));
+        assertMapper(5, EnumMapperPartial.of(I1, 1, I2, 2, I3, 3, I4, 4
                 , I5, 5));
-        assertMapper(6, EnumMapperPartial.of(I1, 1, Nine.I2, 2, I3, 3, I4, 4
+        assertMapper(6, EnumMapperPartial.of(I1, 1, I2, 2, I3, 3, I4, 4
                 , I5, 5, I6, 6));
-        assertMapper(7, EnumMapperPartial.of(I1, 1, Nine.I2, 2, I3, 3, I4, 4
+        assertMapper(7, EnumMapperPartial.of(I1, 1, I2, 2, I3, 3, I4, 4
                 , I5, 5, I6, 6, I7, 7));
-        assertMapper(8, EnumMapperPartial.of(I1, 1, Nine.I2, 2, I3, 3, I4, 4
+        assertMapper(8, EnumMapperPartial.of(I1, 1, I2, 2, I3, 3, I4, 4
                 , I5, 5, I6, 6, I7, 7, I8, 8));
-        assertMapper(9, EnumMapperPartial.of(I1, 1, Nine.I2, 2, I3, 3, I4, 4
+        assertMapper(9, EnumMapperPartial.of(I1, 1, I2, 2, I3, 3, I4, 4
                 , I5, 5, I6, 6, I7, 7, I8, 8, I9, 9));
     }
 
