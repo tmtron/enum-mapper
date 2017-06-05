@@ -13,7 +13,7 @@ The project is available in [Maven Central](https://search.maven.org/#search%7Cg
  [JCenter-Bintray](https://bintray.com/tmtron/maven/com.tmtron.enum-mapper) repositories.
   
 ```gradle
-    def VERSION_ENUM_MAPPER = '1.0.2' // check for newer versions here: https://goo.gl/LSP1fv
+    final VERSION_ENUM_MAPPER = '1.0.2' // check for newer versions here: https://goo.gl/LSP1fv
     compile  "com.tmtron.enums:enum-mapper-lib:${VERSION_ENUM_MAPPER}"
     apt "com.tmtron.enums:enum-mapper-processor:${VERSION_ENUM_MAPPER}"
 ```
