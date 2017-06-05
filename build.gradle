@@ -27,13 +27,13 @@ plugins {
 final isCi = System.getenv("TRAVIS") != null
 
 ext {
-    bintrayDryRun = false
+    bintrayDryRun = true
 }
 
 subprojects {
 
     group 'com.tmtron.enums'
-    version '1.0.3'
+    version '1.0.4-SNAPSHOT'
     description 'Annotation processor that builds an enum mapper which causes a compile-time error when you forget an enum'
 
     repositories {
