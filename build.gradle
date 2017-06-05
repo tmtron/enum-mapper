@@ -24,7 +24,7 @@ plugins {
 }
 
 // https://docs.travis-ci.com/user/environment-variables/
-def isCi = System.getenv("TRAVIS") != null
+final isCi = System.getenv("TRAVIS") != null
 
 ext {
     bintrayDryRun = true
