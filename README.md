@@ -96,31 +96,31 @@ Note. The partial enum mapper does not need the annotation processor.
 
 An example of a partial mapper for your `Seasons` enum:
 ```java
-    EnumMapperPartial<Seasons, String> ExtremeSeasons =
+    EnumMapperPartial<Seasons, String> extremeSeasons =
             EnumMapperPartial.of(SUMMER, "Sommer"
                     , WINTER, "Winter");
 ```
 Now you can call the `getValueOrNull` or `getValueOrDefault` methods like this:
 ```java
-ExtremeSeasons.getValueOrNull(SUMMER);                      // returns "Sommer"
-ExtremeSeasons.getValueOrNull(WINTER);                      // returns "Winter"
-ExtremeSeasons.getValueOrNull(SPRING));                     // returns null
-ExtremeSeasons.getValueOrDefault(SPRING, "not extreme");    // returns "not extreme"
-ExtremeSeasons.getValueOrRaise(SPRING);                     // throws an IllegalArgumentException
-ExtremeSeasons.isEnumMapped(SUMMER);                        // returns true
-ExtremeSeasons.isEnumMapped(SPRING);                        // returns false
+extremeSeasons.getValueOrNull(SUMMER);                      // returns "Sommer"
+extremeSeasons.getValueOrNull(WINTER);                      // returns "Winter"
+extremeSeasons.getValueOrNull(SPRING));                     // returns null
+extremeSeasons.getValueOrDefault(SPRING, "not extreme");    // returns "not extreme"
+extremeSeasons.getValueOrRaise(SPRING);                     // throws an IllegalArgumentException
+extremeSeasons.isEnumMapped(SUMMER);                        // returns true
+extremeSeasons.isEnumMapped(SPRING);                        // returns false
 ```
 
 ## Reverse mapping
 The full and the partial mappers also support reverse lookup.
 
-For example, we can use the `ExtremeSeasons` mapper to get the enum-constant for a string, like this:
+For example, we can use the `extremeSeasons` mapper to get the enum-constant for a string, like this:
 ```java
-ExtremeSeasons.getEnumOrNull("Sommer");                 // returns the enum-constant SUMMER
-ExtremeSeasons.getEnumOrDefault("Fruehling", FALL));    // returns the enum-constant FALL
-ExtremeSeasons.getEnumOrRaise("Fruehling");             // throws an IllegalArgumentException 
-ExtremeSeasons.isValueMapped("Sommer");                 // returns true
-ExtremeSeasons.isValueMapped("Fruehling");              // returns false
+extremeSeasons.getEnumOrNull("Sommer");                 // returns the enum-constant SUMMER
+extremeSeasons.getEnumOrDefault("Fruehling", FALL));    // returns the enum-constant FALL
+extremeSeasons.getEnumOrRaise("Fruehling");             // throws an IllegalArgumentException 
+extremeSeasons.isValueMapped("Sommer");                 // returns true
+extremeSeasons.isValueMapped("Fruehling");              // returns false
 ``` 
 When you do a reverse mapping the mapped values should of course be unique.
 
