@@ -51,9 +51,6 @@ subprojects {
         apply from: rootProject.file('gradle/bintray.gradle')
     }
 
-    /*
-     when I activate the licesne pluign, the bintray plugin creates an invalid pom file!
-     http://stackoverflow.com/questions/43820811/using-the-bintray-plugin-and-license-gradle-plugin-together
 
     apply plugin: "com.github.hierynomus.license"
     license {
@@ -64,7 +61,7 @@ subprojects {
         }
         ext.year = Calendar.getInstance().get(Calendar.YEAR)
     }
-    */
+
 }
 
 

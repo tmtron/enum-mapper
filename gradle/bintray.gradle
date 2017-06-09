@@ -80,7 +80,9 @@ artifacts {
 // Create the pom configuration:
 def pomConfig = {
     licenses {
-        license {
+        // we need to use license([:])
+        // see http://stackoverflow.com/questions/43820811/using-the-bintray-plugin-and-license-gradle-plugin-together
+        license([:]) {
             name "The Apache Software License, Version 2.0"
             url "http://www.apache.org/licenses/LICENSE-2.0.txt"
             distribution "repo"
