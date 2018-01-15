@@ -5,7 +5,7 @@
     <content url="file://$MODULE_DIR$/../../../enum-mapper-processor">
       <excludeFolder url="file://$MODULE_DIR$/../../../enum-mapper-processor/.gradle" />
       <excludeFolder url="file://$MODULE_DIR$/../../../enum-mapper-processor/build" />
-      <excludeFolder url="file://$MODULE_DIR$/../../../processor/.gradle" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../enum-mapper-processor/out" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

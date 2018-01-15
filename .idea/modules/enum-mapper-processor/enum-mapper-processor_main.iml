@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module external.linked.project.id=":enum-mapper-processor:main" external.linked.project.path="$MODULE_DIR$/../../../enum-mapper-processor" external.root.project.path="$MODULE_DIR$/../../.." external.system.id="GRADLE" external.system.module.group="com.tmtron.enums" external.system.module.type="sourceSet" external.system.module.version="1.0.4-SNAPSHOT" type="JAVA_MODULE" version="4">
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
-    <output url="file://$MODULE_DIR$/../../../enum-mapper-processor/build/classes/main" />
+    <output url="file://$MODULE_DIR$/../../../enum-mapper-processor/out/production/classes" />
     <exclude-output />
     <content url="file://$MODULE_DIR$/../../../enum-mapper-processor/src/main">
       <sourceFolder url="file://$MODULE_DIR$/../../../enum-mapper-processor/src/main/java" isTestSource="false" />
