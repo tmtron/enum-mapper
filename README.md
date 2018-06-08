@@ -5,7 +5,9 @@
 # enum-mapper
 The main use: make sure that you always handle all available constants of an enum. An annotation processor will
  make sure that you get a compile-time error otherwise: see [Full Enum Mapper](#full-enum-mapper).  
-You can also use a [Partial Mapper](#partial-enum-mapper) and it supports [Reverse Mapping](#reverse-mapping).
+You can also use a [Partial Mapper](#partial-enum-mapper) and it supports [Reverse Mapping](#reverse-mapping).  
+Since version 1.4 [Incremental Annotation Processing ](https://docs.gradle.org/current/userguide/java_plugin.html#sec:incremental_annotation_processing)
+ is supported for Gradle builds.
 
 ## Build Configuration
 
@@ -13,12 +15,12 @@ The project is available in [Maven Central](https://search.maven.org/#search%7Cg
  [JCenter-Bintray](https://bintray.com/tmtron/maven/com.tmtron.enum-mapper) repositories.
   
 ```gradle
-    final VERSION_ENUM_MAPPER = '1.0.3' // check for newer versions here: https://goo.gl/LSP1fv
-    compile  "com.tmtron.enums:enum-mapper-lib:${VERSION_ENUM_MAPPER}"
-    apt "com.tmtron.enums:enum-mapper-processor:${VERSION_ENUM_MAPPER}"
+    final VERSION_ENUM_MAPPER = '1.0.4' // check for newer versions here: https://goo.gl/LSP1fv
+    implementation  "com.tmtron.enums:enum-mapper-lib:${VERSION_ENUM_MAPPER}"
+    annotationProcessor "com.tmtron.enums:enum-mapper-processor:${VERSION_ENUM_MAPPER}"
 ```
 ### enum-mapper-lib 
-Contains java code and annoations.  
+Contains java code and annotations.  
 This is always needed at compile-time.  
 [![Maven Central lib](https://img.shields.io/maven-central/v/com.tmtron.enums/enum-mapper-lib.svg?maxAge=86400)](https://maven-badges.herokuapp.com/maven-central/com.tmtron.enums/enum-mapper-lib) [![Javadoc](https://javadoc-emblem.rhcloud.com/doc/com.tmtron.enums/enum-mapper-lib/badge.svg?maxAge=86400)](http://www.javadoc.io/doc/com.tmtron.enums/enum-mapper-lib/) 
  
@@ -181,7 +183,6 @@ For example [FindBugs](http://findbugs.sourceforge.net/) has a check *Switch sta
 
 *Disadvantages*
 * those are other tools that you must learn to use and maintain 
-
 
 ## License
 This plugin is under the [Apache 2.0 license](http://www.apache.org/licenses/LICENSE-2.0.html). Copyright 2018, Martin Trummer
