@@ -47,7 +47,9 @@ subprojects {
         testCompile group: 'junit', name: 'junit', version: '4.12'
     }
 
-    if (!(isCi || isJitpack)) {
+    if (isCi || isJitpack) {
+        System.err.println("skipping bintray for CI / JitPack builds")
+    } else {
         // we don't need the bintray features for the ci/jitpack builds build
         apply from: rootProject.file('gradle/bintray.gradle')
     }
