@@ -48,8 +48,9 @@ subprojects {
     }
 
     if (isCi || isJitpack) {
-        System.err.println("skipping bintray for CI / JitPack builds")
+        logger.warn('skipping bintray for CI / JitPack builds')
     } else {
+        logger.warn('using bintray')
         // we don't need the bintray features for the ci/jitpack builds build
         apply from: rootProject.file('gradle/bintray.gradle')
     }
