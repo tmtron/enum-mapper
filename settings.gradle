@@ -2,3 +2,5 @@ rootProject.name = 'enums'
 include 'enum-mapper-processor'
 include 'enum-mapper-lib'
 
+// see: https://docs.gradle.org/4.8/userguide/publishing_maven.html#publishing_maven:deferred_configuration
+enableFeaturePreview('STABLE_PUBLISHING')
