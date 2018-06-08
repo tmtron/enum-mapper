@@ -6,10 +6,15 @@ dependencies {
     compile project(':enum-mapper-lib')
 
     compile 'com.squareup:javapoet:1.11.1'
+    compile 'com.google.auto:auto-common:0.10'
     // unfortunately lib and processor are in the same artifact
     // see: https://github.com/google/auto/issues/632
     compileOnly 'com.google.auto.service:auto-service:1.0-rc4'
-    compile 'com.google.auto:auto-common:0.10'
+
+    // https://github.com/tbroyer/gradle-incap-helper
+    final INCAP_VERSION = '0.1'
+    compileOnly("net.ltgt.gradle.incap:incap:${INCAP_VERSION}")
+    annotationProcessor("net.ltgt.gradle.incap:incap-processor:${INCAP_VERSION}")
 
     testCompile 'com.google.testing.compile:compile-testing:0.15'
     testCompile 'com.google.truth:truth:0.40'

@@ -18,6 +18,9 @@ package com.tmtron.enums.processor;
 import com.google.auto.common.BasicAnnotationProcessor;
 import com.google.auto.service.AutoService;
 
+import net.ltgt.gradle.incap.IncrementalAnnotationProcessor;
+import net.ltgt.gradle.incap.IncrementalAnnotationProcessorType;
+
 import java.util.Collections;
 
 import javax.annotation.processing.Processor;
@@ -27,6 +30,7 @@ import javax.lang.model.SourceVersion;
  * This class will register the annotation processor/s.
  */
 @AutoService(Processor.class)
+@IncrementalAnnotationProcessor(IncrementalAnnotationProcessorType.AGGREGATING)
 public class EnumsAnnotationProcessor extends BasicAnnotationProcessor {
 
     @Override

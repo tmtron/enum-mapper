@@ -129,8 +129,13 @@ class WriteMapperFull {
     private TypeSpec.Builder createFullMapperTypeSpecBuilder() {
         // LauncherAge_MapperFull
         ClassName className = ClassName.bestGuess(enumsClassTypeElement.getQualifiedName() + "_MapperFull");
-        TypeSpec.Builder result = TypeSpec.classBuilder(className).addModifiers(Modifier.PUBLIC,
-                Modifier.FINAL);
+        TypeSpec.Builder result = TypeSpec.classBuilder(className).addModifiers(Modifier.PUBLIC, Modifier.FINAL);
+
+        /*
+         * We must add the originating elements in order to use Gradles "Incremental annotation processing"
+         * https://docs.gradle.org/4.8-rc-2/userguide/java_plugin.html#sec:incremental_annotation_processing
+         */
+        annotatedElements.forEach(result::addOriginatingElement);
         // @Generated annotation
         result.addAnnotation(
                 createGeneratedAnnotation(EnumsAnnotationProcessor.class)

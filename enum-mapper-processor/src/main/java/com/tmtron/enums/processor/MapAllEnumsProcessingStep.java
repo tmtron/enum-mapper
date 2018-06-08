@@ -54,8 +54,7 @@ public class MapAllEnumsProcessingStep implements BasicAnnotationProcessor.Proce
     @Override
     public Set<Element> process(SetMultimap<Class<? extends Annotation>, Element> elementsByAnnotation) {
         try {
-            Map<Class<? extends Annotation>, Collection<Element>> annotationsMap =
-                    elementsByAnnotation.asMap();
+            Map<Class<? extends Annotation>, Collection<Element>> annotationsMap = elementsByAnnotation.asMap();
             // the annotations() method tells the framework which annotations to accept
             if (annotationsMap.keySet().size() > 2) throw new RuntimeException("Too many annotations");
 
