@@ -5,11 +5,13 @@ sourceCompatibility = 1.8
 dependencies {
     compile project(':enum-mapper-lib')
 
-    compile 'com.squareup:javapoet:1.11.1'
-    compile 'com.google.auto:auto-common:0.10'
+    implementation 'com.squareup:javapoet:1.11.1'
+    implementation 'com.google.auto:auto-common:0.10'
     // unfortunately lib and processor are in the same artifact
     // see: https://github.com/google/auto/issues/632
-    compileOnly 'com.google.auto.service:auto-service:1.0-rc4'
+    final GOOGLE_AUTO_SERVICE = 'com.google.auto.service:auto-service:1.0-rc4'
+    implementation GOOGLE_AUTO_SERVICE
+    annotationProcessor GOOGLE_AUTO_SERVICE
 
     // https://github.com/tbroyer/gradle-incap-helper
     final INCAP_VERSION = '0.1'
