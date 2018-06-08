@@ -43,7 +43,6 @@ class MapAllEnumsHandler {
     private static final String ENUMS_ID = "value";
     private final ProcessingEnvironment processingEnvironment;
     private final Set<Element> annotatedElements;
-    ;
 
     /**
      * Will process an element (e.g. a class) which must have the {@link EnumMappers} annotation.

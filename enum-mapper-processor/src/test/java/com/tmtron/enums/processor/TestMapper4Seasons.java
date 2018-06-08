@@ -22,7 +22,7 @@ import org.junit.Test;
  */
 public class TestMapper4Seasons extends AnnotationProcessorTest {
     @Test
-    public void test() throws Exception {
+    public void test() {
         assertAboutEnumsProcessing(getJfoResource("Seasons.java"))
                 .compilesWithoutWarnings()
                 .and()

@@ -31,14 +31,14 @@ public class TestLauncherAge {
             .setOFFLINE("offline");
 
     @Test
-    public void testLauncherAgeGetEnum() throws Exception {
+    public void testLauncherAgeGetEnum() {
         assertEquals(LauncherAge.ONLINE, testMapper.getEnumOrRaise("online"));
         assertEquals(LauncherAge.OLD, testMapper.getEnumOrRaise("old"));
         assertEquals(LauncherAge.OFFLINE, testMapper.getEnumOrRaise("offline"));
     }
 
     @Test
-    public void testLauncherAgeGetValues() throws Exception {
+    public void testLauncherAgeGetValues() {
         assertEquals("online", testMapper.getValue(LauncherAge.ONLINE));
         assertEquals("old", testMapper.getValue(LauncherAge.OLD));
         assertEquals("offline", testMapper.getValue(LauncherAge.OFFLINE));

@@ -75,24 +75,24 @@ public class TestEnumMapperFull {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testBuilderThrowsOnMissingValues() throws Exception {
+    public void testBuilderThrowsOnMissingValues() {
         EnumMapperFull<Nine, String> mapper = EnumMapperFull.builder(I1, "1")
                 .put(I2, "2")
                 .build();
     }
 
     @Test
-    public void testGetOrDefault() throws Exception {
+    public void testGetOrDefault() {
         assertEquals(I7, fullMapper.getEnumOrDefault(77, I7));
     }
 
     @Test
-    public void testGetOrNull() throws Exception {
+    public void testGetOrNull() {
         assertNull(fullMapper.getEnumOrNull(77));
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testGetOrRaise() throws Exception {
+    public void testGetOrRaise() {
         fullMapper.getEnumOrRaise(77);
     }
 

@@ -41,7 +41,7 @@ public class TestMappers4SingleEnum extends AnnotationProcessorTest {
     }
 
     @Test
-    public void testLauncherAgeMappingFull() throws Exception {
+    public void testLauncherAgeMappingFull() {
         assertAboutEnumsProcessing(source)
                 .compilesWithoutWarnings()
                 .and()

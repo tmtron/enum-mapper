@@ -44,7 +44,7 @@ class MapEnumElement {
      * Will process a single Enum class of the {@link EnumMappers} annotation.
      *
      * @param processingEnvironment the processing environment
-     * @param annotatedElements     the element/s (e.g. classe) which has/have the {@link EnumMappers} annotation
+     * @param annotatedElements     the element/s (e.g. classes) which has/have the {@link EnumMappers} annotation
      * @param enumsClassTypeElement a single Enum class from the "values" array of the {@link EnumMappers} annotation
      */
     MapEnumElement(ProcessingEnvironment processingEnvironment, Collection<Element> annotatedElements,

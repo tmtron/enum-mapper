@@ -19,7 +19,7 @@ import org.junit.Test;
 
 public class TestMappers4TwoEnums extends AnnotationProcessorTest {
     @Test
-    public void test() throws Exception {
+    public void test() {
         assertAboutEnumsProcessing(getJfoResource("TwoEnums_Source.java"))
                 .compilesWithoutWarnings()
                 .and()

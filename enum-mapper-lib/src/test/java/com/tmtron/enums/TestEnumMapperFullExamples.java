@@ -22,7 +22,7 @@ import static org.junit.Assert.assertEquals;
 public class TestEnumMapperFullExamples {
 
     @Test
-    public void testBool() throws Exception {
+    public void testBool() {
         EnumMapperFull<TwoEnums_Source.BoolEnum, String> boolMapper = BoolEnum_MapperFull.setOFF("off")
                 .setON("on");
         assertEquals(TwoEnums_Source.BoolEnum.OFF, boolMapper.getEnumOrRaise("off"));
@@ -33,7 +33,7 @@ public class TestEnumMapperFullExamples {
     }
 
     @Test
-    public void testColor() throws Exception {
+    public void testColor() {
         EnumMapperFull<TwoEnums_Source.ColorEnum, String> boolMapper = ColorEnum_MapperFull.setRED("red")
                 .setBLUE("blue");
         assertEquals(TwoEnums_Source.ColorEnum.RED, boolMapper.getEnumOrRaise("red"));

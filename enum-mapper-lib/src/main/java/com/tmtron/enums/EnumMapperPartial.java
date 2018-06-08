@@ -25,7 +25,7 @@ import javax.annotation.Nullable;
  * <p> In comparison to {@link EnumMapperFull} it will not check if all enumerations constants are mapped.
  * </p>
  * <p>
- * Note: this class does not allow for {@code null} values. You may use {@link java.util.Optional} as type.
+ * Note: this class does not allow for {@code null} values. You may use {@code java.util.Optional} as type.
  * </p>
  *
  * @param <K> the enum-type

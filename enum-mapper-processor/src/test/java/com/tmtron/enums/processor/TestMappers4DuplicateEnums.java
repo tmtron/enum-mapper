@@ -27,7 +27,7 @@ public class TestMappers4DuplicateEnums extends AnnotationProcessorTest {
      * </p>
      */
     @Test
-    public void test() throws Exception {
+    public void test() {
         assertAboutEnumsProcessing(getJfoResource("DuplicateEnums_Source.java"))
                 .compilesWithoutWarnings()
                 .and()

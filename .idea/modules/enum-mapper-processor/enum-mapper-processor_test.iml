@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module external.linked.project.id=":enum-mapper-processor:test" external.linked.project.path="$MODULE_DIR$/../../../enum-mapper-processor" external.root.project.path="$MODULE_DIR$/../../.." external.system.id="GRADLE" external.system.module.group="com.tmtron.enums" external.system.module.type="sourceSet" external.system.module.version="1.0.4-SNAPSHOT" type="JAVA_MODULE" version="4">
+<module external.linked.project.id=":enum-mapper-processor:test" external.linked.project.path="$MODULE_DIR$/../../../enum-mapper-processor" external.root.project.path="$MODULE_DIR$/../../.." external.system.id="GRADLE" external.system.module.group="com.tmtron.enums" external.system.module.type="sourceSet" external.system.module.version="1.0.4" type="JAVA_MODULE" version="4">
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
     <output-test url="file://$MODULE_DIR$/../../../enum-mapper-processor/out/test/classes" />
     <exclude-output />
@@ -21,6 +21,7 @@
     </orderEntry>
     <orderEntry type="module" module-name="enum-mapper-lib_main" />
     <orderEntry type="library" name="Gradle: com.squareup:javapoet:1.11.1" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.auto.service:auto-service:1.0-rc4" level="project" />
     <orderEntry type="library" name="Gradle: com.google.testing.compile:compile-testing:0.15" level="project" />
     <orderEntry type="library" name="Gradle: com.google.auto:auto-common:0.10" level="project" />
     <orderEntry type="library" name="Gradle: com.google.truth.extensions:truth-java8-extension:0.37" level="project" />

@@ -91,7 +91,7 @@ class WriteMapperFull {
     /**
      * Will add the required interfaces for the build-stages to the mapperFullTypeBuilder.
      * <ul>
-     * <li>we need no interface for the first enum-constant, becuase we create a static method for this</li>
+     * <li>we need no interface for the first enum-constant, because we create a static method for this</li>
      * <li>the last interface will return the fully initialized mapper</li>
      * </ul>
      *
