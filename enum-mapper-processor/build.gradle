@@ -6,7 +6,9 @@ dependencies {
     compile project(':enum-mapper-lib')
 
     compile 'com.squareup:javapoet:1.11.1'
-    compile 'com.google.auto.service:auto-service:1.0-rc4'
+    // unfortunately lib and processor are in the same artifact
+    // see: https://github.com/google/auto/issues/632
+    compileOnly 'com.google.auto.service:auto-service:1.0-rc4'
     compile 'com.google.auto:auto-common:0.10'
 
     testCompile 'com.google.testing.compile:compile-testing:0.15'

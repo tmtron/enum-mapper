@@ -21,7 +21,6 @@
     </orderEntry>
     <orderEntry type="module" module-name="enum-mapper-lib_main" />
     <orderEntry type="library" name="Gradle: com.squareup:javapoet:1.11.1" level="project" />
-    <orderEntry type="library" name="Gradle: com.google.auto.service:auto-service:1.0-rc4" level="project" />
     <orderEntry type="library" name="Gradle: com.google.testing.compile:compile-testing:0.15" level="project" />
     <orderEntry type="library" name="Gradle: com.google.auto:auto-common:0.10" level="project" />
     <orderEntry type="library" name="Gradle: com.google.truth.extensions:truth-java8-extension:0.37" level="project" />
