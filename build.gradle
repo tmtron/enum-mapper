@@ -25,6 +25,7 @@ plugins {
 
 // https://docs.travis-ci.com/user/environment-variables/
 final isCi = System.getenv("TRAVIS") != null
+final isJitpack = System.getenv("JITPACK") != null
 
 ext {
     bintrayDryRun = true
@@ -46,8 +47,8 @@ subprojects {
         testCompile group: 'junit', name: 'junit', version: '4.12'
     }
 
-    if (!isCi) {
-        // we don't need the bintray features for the ci build
+    if (!(isCi || isJitpack)) {
+        // we don't need the bintray features for the ci/jitpack builds build
         apply from: rootProject.file('gradle/bintray.gradle')
     }
 
