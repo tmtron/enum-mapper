@@ -10,5 +10,5 @@ dependencies {
     /* jsr305 includes a NonNull annotation
      * see also: http://stackoverflow.com/questions/4963300/which-notnull-java-annotation-should-i-use
      */
-    compileOnly 'com.google.code.findbugs:jsr305:2.0.1'
+    compileOnly 'com.google.code.findbugs:jsr305:3.0.2'
 }

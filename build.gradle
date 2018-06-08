@@ -1,6 +1,6 @@
 buildscript {
     dependencies {
-        classpath "gradle.plugin.nl.javadude.gradle.plugins:license-gradle-plugin:0.13.1"
+        classpath "gradle.plugin.nl.javadude.gradle.plugins:license-gradle-plugin:0.14.0"
     }
 }
 
@@ -18,9 +18,9 @@ plugins {
      *   the results in the Inspection view will contain dependencies that can be updated
      *   Android>Lint>Correctness>Obsolete Gradle Dependency
      */
-    id 'com.github.ben-manes.versions' version '0.14.0'
+    id 'com.github.ben-manes.versions' version '0.17.0'
     // for publishing
-    id "com.jfrog.bintray" version "1.7.3"
+    id "com.jfrog.bintray" version "1.8.0"
 }
 
 // https://docs.travis-ci.com/user/environment-variables/
