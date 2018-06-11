@@ -20,7 +20,7 @@ plugins {
      */
     id 'com.github.ben-manes.versions' version '0.17.0'
     // for publishing
-    id "com.jfrog.bintray" version "1.8.0"
+    id "com.jfrog.bintray" version "1.8.1"
 }
 
 // https://docs.travis-ci.com/user/environment-variables/
@@ -31,13 +31,14 @@ ext {
     bintrayDryRun = false
 }
 
-subprojects {
-
+allprojects {
     group 'com.tmtron.enums'
     version '1.0.4'
     // version '1.0.5-SNAPSHOT'
     description 'Annotation processor that builds an enum mapper which causes a compile-time error when you forget an enum'
+}
 
+subprojects {
     repositories {
         mavenCentral()
     }
@@ -55,7 +56,6 @@ subprojects {
         // we don't need the bintray features for the ci/jitpack builds build
         apply from: rootProject.file('gradle/bintray.gradle')
     }
-
 
     apply plugin: "com.github.hierynomus.license"
     license {

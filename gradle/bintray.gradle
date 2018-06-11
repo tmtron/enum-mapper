@@ -2,21 +2,21 @@ apply plugin: 'maven'
 apply plugin: 'maven-publish'
 apply plugin: 'com.jfrog.bintray'
 
-def vcProvider = 'github'
-def vcProviderUser = 'tmtron'
-def vcProviderProject = 'enum-mapper'
-def vcGithubRepo = "${vcProviderUser}/${vcProviderProject}"
+final String vcProvider = 'github'
+final String vcProviderUser = 'tmtron'
+final String vcProviderProject = 'enum-mapper'
+final String vcGithubRepo = "${vcProviderUser}/${vcProviderProject}"
 // e.g. https://github.com/tmtron/enum-mapper
-def vcProviderUrl = "https://${vcProvider}.com/${vcProviderUser}/${vcProviderProject}"
-def vcProviderIssuesUrl = "${vcProviderUrl}/issues"
-def vcProviderScmUrl = "scm:git:${vcProviderUrl}.git"
-def bintrayPackage = "com.tmtron.${vcProviderProject}"
+final String vcProviderUrl = "https://${vcProvider}.com/${vcProviderUser}/${vcProviderProject}"
+final String vcProviderIssuesUrl = "${vcProviderUrl}/issues"
+final String vcProviderScmUrl = "scm:git:${vcProviderUrl}.git"
+final String bintrayPackage = "com.tmtron.${vcProviderProject}"
 
 bintray {
     // defined in ~/.gradle/gradle.properties
     user = "$bintray_user"
     key = "$bintray_api_key"
-    publications = ['PublicationTmtron']
+    setPublications('PublicationTmtron')
     pkg {
         repo = 'maven'
         name = bintrayPackage
@@ -39,7 +39,7 @@ bintray {
         }
     }
     // whether to run this as dry-run, without deploying
-    dryRun = bintrayDryRun
+    setDryRun(bintrayDryRun)
 }
 
 if (!bintrayDryRun) {
@@ -78,7 +78,7 @@ artifacts {
 }
 
 // Create the pom configuration:
-def pomConfig = {
+final pomConfig = {
     licenses {
         // we need to use license([:])
         // see http://stackoverflow.com/questions/43820811/using-the-bintray-plugin-and-license-gradle-plugin-together
@@ -111,9 +111,8 @@ publishing {
             artifact sourcesJar
             artifact javadocJar
 
-            groupId "$project.group"
-            artifactId "$project.name"
-            version "$project.version"
+            // note: the defaults for groupId, artifactId, version are okay
+            // https://docs.gradle.org/current/dsl/org.gradle.api.publish.maven.MavenPublication.html#N1ACB3
 
             pom.withXml {
                 def root = asNode()
