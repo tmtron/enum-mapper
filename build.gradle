@@ -28,13 +28,12 @@ final isCi = System.getenv("TRAVIS") != null
 final isJitpack = System.getenv("JITPACK") != null
 
 ext {
-    bintrayDryRun = false
+    bintrayDryRun = true
 }
 
 allprojects {
     group 'com.tmtron.enums'
-    version '1.0.4'
-    // version '1.0.5-SNAPSHOT'
+    version '1.0.5-SNAPSHOT'
     description 'Annotation processor that builds an enum mapper which causes a compile-time error when you forget an enum'
 }
 
